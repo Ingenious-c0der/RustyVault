@@ -1,0 +1,23 @@
+{
+  "name": "RustyVault",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "next dev -p 1420",
+    "build": "next build && next export -o dist",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@tauri-apps/api": "^1.2.0",
+    "next": "^13.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.2.2"
+  }
+}
