@@ -42,7 +42,9 @@
         "providerShortName": null,
         "signingIdentity": null
       },
-      "resources": [],
+      "resources": [
+        "src\\vault_access.rs"
+      ],
       "shortDescription": "",
       "targets": "all",
       "windows": {
