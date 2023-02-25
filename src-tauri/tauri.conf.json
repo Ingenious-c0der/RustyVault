@@ -33,7 +33,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.tauri.RustyVault",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -43,7 +43,7 @@
         "signingIdentity": null
       },
       "resources": [
-        "src\\vault_access.rs"
+     
       ],
       "shortDescription": "",
       "targets": "all",
