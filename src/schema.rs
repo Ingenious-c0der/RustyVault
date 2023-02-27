@@ -4,6 +4,6 @@ diesel::table! {
     pst (id) {
         id -> Integer,
         name -> Text,
-        ps -> Text,
+        password -> Text,
     }
 }

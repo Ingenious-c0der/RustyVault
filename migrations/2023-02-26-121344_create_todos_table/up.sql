@@ -1,0 +1,6 @@
+-- Your SQL goes here
+CREATE TABLE pst (
+  id INTEGER NOT NULL PRIMARY KEY,
+  name VARCHAR NOT NULL, 
+  password VARCHAR NOT NULL
+);

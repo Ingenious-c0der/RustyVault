@@ -1,6 +1,0 @@
--- Your SQL goes here
-CREATE TABLE pst(
-    id INTEGER NOT NULL PRIMARY KEY,
-    name VARCHAR NOT NULL ,
-    ps VARCHAR NOT NULL
-); 

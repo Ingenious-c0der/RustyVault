@@ -2,8 +2,8 @@ extern crate dotenv;
 
 
 pub mod models; 
-use crate::schema::*;
 use diesel::prelude::*;
+use crate::schema::*; 
 use dotenv::dotenv; 
 use models::{NewPst, Pst};
 use std::env;
@@ -27,6 +27,7 @@ pub fn insert_pst<'a>(conn: &SqliteConnection, name: &'a str, password: &'a str)
         .values(&new_pst)
         .execute(conn)
         .expect("Error adding new User"); 
+    //might need to create struct containing bool and string value to return
     let res_json = serde_json::to_string(&res).unwrap();
     res_json
 }
