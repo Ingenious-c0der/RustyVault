@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import Image from "next/image";
 import vaultLogo from "../assets/vault.png";
-import FlashMessage from "react-native-flash-message";
-import { showMessage, hideMessage } from "react-native-flash-message";
-
 class Register extends React.Component {
 
     constructor(props) {
@@ -24,7 +21,6 @@ class Register extends React.Component {
 
           this.setState({password: event.target.value});
           
-        
     }
     handleSubmit =  async (event) => {
         try{
@@ -32,28 +28,27 @@ class Register extends React.Component {
         event.preventDefault();
         if(this.state.username.length < 3 || this.state.password.length < 3)
         {
-          showMessage({message: "Username and Password must be at least 3 characters long", type: "info", color: "red"})
+         // showMessage({message: "Username and Password must be at least 3 characters long", type: "info", color: "red"})
 
           return;
         }
-        console.log("username: " + this.state.username + " password: " + this.state.password)
         const response = await invoke("register", {
             name: this.state.username,
             password: this.state.password,
         });
         if(response)
         {
-          showMessage({message: "Registration Successful", type: "success" ,color: "green"})
-          window.location.href = "/index";
+         // showMessage({message: "Registration Successful", type: "success" ,color: "green"})
+          window.location.href = "/";
         }
         else
         {
-          showMessage({message: "Registration Failed", type: "danger", color: "red"})
+       //   showMessage({message: "Registration Failed", type: "danger", color: "red"})
         }
         console.log("response" , response)
     } catch (error) {
         console.log("error", error)
-        showMessage({message: "Registration Failed", type: "danger", color: "red"})
+      //  showMessage({message: "Registration Failed", type: "danger", color: "red"})
     }
     }
 
@@ -108,7 +103,6 @@ class Register extends React.Component {
       </div>
      
     </div>
-     <FlashMessage ref = "registerFlashMessage" position="bottom" />
     </div>
    
 

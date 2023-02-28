@@ -5,6 +5,57 @@ import Image from "next/image";
 import vaultLogo from "../assets/vault.png";
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+    };
+  } 
+  handleUsernameChange = (event) => {
+
+    this.setState({username: event.target.value});
+   
+}
+handlePasswordChange = (event) => {
+
+     this.setState({password: event.target.value});
+     
+}
+handleSubmit =  async (event) => {
+   try{
+   console.log("submit")
+   event.preventDefault();
+   if(this.state.username.length < 3 || this.state.password.length < 3)
+   {
+    // showMessage({message: "Username and Password must be at least 3 characters long", type: "info", color: "red"})
+
+     return;
+   }
+   const response = await invoke("login", {
+       name: this.state.username,
+       password: this.state.password,
+   });
+   console.log("response" , response)  
+   if(response)
+   {
+   //  showMessage({message: "Registration Successful", type: "success" ,color: "green"})
+  
+   window.location.href = "/homepage";
+   }
+   else
+   {
+    // showMessage({message: "Registration Failed", type: "danger", color: "red"})
+   }
+   console.log("response" , response)
+} catch (error) {
+   console.log("error", error)
+  // showMessage({message: "Registration Failed", type: "danger", color: "red"})
+}
+}
+
+
   render() {
    
     return (
@@ -33,6 +84,7 @@ class App extends React.Component {
                   type="text"
                   className="form-control"
                   placeholder="Username"
+                  onChange={this.handleUsernameChange}
                 />
               </div>
 
@@ -42,10 +94,11 @@ class App extends React.Component {
                   type="password"
                   className="form-control"
                   placeholder="Password"
+                  onChange={this.handlePasswordChange}
                 />
               </div>
               <div>
-                <button type="button" className="btn btn-secondary btn-block">
+                <button type="button" className="btn btn-secondary btn-block" onClick = {this.handleSubmit}>
                   Login
                 </button>
               </div>

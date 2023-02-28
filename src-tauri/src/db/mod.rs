@@ -35,6 +35,6 @@ pub fn insert_pst<'a>(conn: &SqliteConnection, name: &'a str, password: &'a str)
 pub fn get_pst<'a>(conn: &SqliteConnection , username: &'a  str ) -> String {
     use crate::schema::pst::dsl::*;
     let res = pst.filter(name.eq(username)).load::<Pst>(conn).expect("Error loading pst");
-    let res_json = serde_json::to_string(&res).unwrap();
+    let res_json = serde_json::to_string(&res[0].password).unwrap();
     res_json
 }

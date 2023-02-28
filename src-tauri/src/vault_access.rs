@@ -18,6 +18,6 @@ pub fn generate_hash(password: &str) -> String {
 
 pub fn verify_hash(hash: &str, password: &str) -> bool {
     let argon2 = Argon2::default();
-    let hash = PasswordHash::new(hash).unwrap();
-    argon2.verify_password(password.as_bytes(), &hash).is_ok()
+    let this_hash = PasswordHash::new(hash).unwrap();
+    argon2.verify_password(password.as_bytes(), &this_hash).is_ok()
 }
