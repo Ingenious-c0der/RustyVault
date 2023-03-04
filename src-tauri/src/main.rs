@@ -43,7 +43,7 @@ fn login(state: tauri::State<AppState>,name: &str, password: &str) -> bool {
     println!("Logging in user {0} {1}", name, password);
     let conn = state.conn.lock().unwrap();
     let pass_hash = db::get_pst(&conn, name);
-    println!("{pass_hash}") ; 
+    println!("Pass hash: {pass_hash}") ; 
     let res = vault_access::verify_hash(&pass_hash, password);
     //print the result
     println!("Login result : {} {} ", res , pass_hash);
