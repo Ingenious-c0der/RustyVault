@@ -7,7 +7,7 @@ use crate::schema::*;
 use dotenv::dotenv; 
 use models::{NewPst, Pst};
 use std::env;
-
+use std::error::Error;
 
 
 pub fn establish_connection() -> SqliteConnection {
@@ -32,9 +32,13 @@ pub fn insert_pst<'a>(conn: &SqliteConnection, name: &'a str, password: &'a str)
     res_json
 }
 
-pub fn get_pst<'a>(conn: &SqliteConnection , username: &'a  str ) ->String {
+pub fn get_pst<'a>(conn: &SqliteConnection , username: &'a  str ) ->Result<String,Box<dyn Error>> {
     use crate::schema::pst::dsl::*;
     let res = pst.filter(name.eq(username)).load::<Pst>(conn).expect("Error loading pst");
+    //handle the not matched case 
+    if res.len() == 0{
+        return Err("No user found".into());
+    }
     let res_json = serde_json::to_string(&res[0].password).unwrap();
-    res_json
+    Ok(res_json)
 }

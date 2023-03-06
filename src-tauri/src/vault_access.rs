@@ -21,10 +21,7 @@ pub fn generate_hash(password: &str) -> String {
 
 pub fn verify_hash(hash: &str, password: &str) -> bool {
 
-    println!("Comparing Hash: {} with {}", hash, password);
-    //this throws error that hash is not a valid phc string
+    let hash = &hash[1..hash.len() - 1];
     let this_hash = PasswordHash::new(hash).unwrap();
-    //print phc string of this hash 
-    println!("PHC String: {}", this_hash.to_string());
     Argon2::default().verify_password(password.as_bytes(), &this_hash).is_ok()
 }

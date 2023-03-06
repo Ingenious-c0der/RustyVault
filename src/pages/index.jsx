@@ -27,7 +27,7 @@ handleSubmit =  async (event) => {
    try{
    console.log("submit")
    event.preventDefault();
-   if(this.state.username.length < 3 || this.state.password.length < 3)
+   if(this.state.username.length < 3 || this.state.password.length < 8)
    {
     // showMessage({message: "Username and Password must be at least 3 characters long", type: "info", color: "red"})
 
@@ -42,7 +42,7 @@ handleSubmit =  async (event) => {
    {
    //  showMessage({message: "Registration Successful", type: "success" ,color: "green"})
   
-   window.location.href = "/homepage";
+   window.location.href = "/register";
    }
    else
    {
@@ -84,6 +84,7 @@ handleSubmit =  async (event) => {
                   type="text"
                   className="form-control"
                   placeholder="Username"
+                  required minLength="3"
                   onChange={this.handleUsernameChange}
                 />
               </div>
@@ -94,6 +95,7 @@ handleSubmit =  async (event) => {
                   type="password"
                   className="form-control"
                   placeholder="Password"
+                  required minLength = "8" 
                   onChange={this.handlePasswordChange}
                 />
               </div>

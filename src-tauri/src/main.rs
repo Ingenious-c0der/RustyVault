@@ -2,6 +2,7 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
+
 use diesel_migrations::embed_migrations;
 #[macro_use]
 extern crate diesel;
@@ -42,8 +43,15 @@ fn register(state: tauri::State<AppState>,name: &str, password: &str) -> bool {
 fn login(state: tauri::State<AppState>,name: &str, password: &str) -> bool {
     println!("Logging in user {0} {1}", name, password);
     let conn = state.conn.lock().unwrap();
-    let pass_hash = db::get_pst(&conn, name);
-    println!("Pass hash: {pass_hash}") ; 
+    let pass_hash = db::get_pst(&conn, name).unwrap_or_else({
+        |e| {
+            println!("Error : {}", e);
+            String::from("Error")
+        }
+    });
+    if pass_hash == "Error" {
+        return false;
+    }
     let res = vault_access::verify_hash(&pass_hash, password);
     //print the result
     println!("Login result : {} {} ", res , pass_hash);
@@ -55,7 +63,6 @@ fn main() {
     let state = AppState {
         conn: Mutex::new(db::establish_connection()),
     };
-  
   diesel_migrations::run_pending_migrations(&conn).expect("Error migrating");
     tauri::Builder::default()
         .manage(state)
