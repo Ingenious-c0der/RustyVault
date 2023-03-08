@@ -42,7 +42,7 @@ handleSubmit =  async (event) => {
    {
    //  showMessage({message: "Registration Successful", type: "success" ,color: "green"})
   
-   window.location.href = "/register";
+   window.location.href = "/homepage";
    }
    else
    {
