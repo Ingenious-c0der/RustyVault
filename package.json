@@ -12,13 +12,16 @@
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@tauri-apps/api": "^1.2.0",
+    "bootstrap": "^5.2.3",
     "next": "^13.0.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-native-flash-message": "^0.4.0",
     "react-notifications": "^1.7.4",
-    "react-notifications-component": "^4.0.1"
+    "react-notifications-component": "^4.0.1",
+    "react-toastify": "^9.1.1"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1.2.2"

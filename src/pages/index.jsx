@@ -3,7 +3,8 @@ import React from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import Image from "next/image";
 import vaultLogo from "../assets/vault.png";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 class App extends React.Component {
 
   constructor(props) {
@@ -29,8 +30,8 @@ handleSubmit =  async (event) => {
    event.preventDefault();
    if(this.state.username.length < 3 || this.state.password.length < 8)
    {
-    // showMessage({message: "Username and Password must be at least 3 characters long", type: "info", color: "red"})
-
+    toast.error("Invalid Username or Password")
+    this.setState({username: '', password: ''})
      return;
    }
    const response = await invoke("login", {
@@ -40,18 +41,20 @@ handleSubmit =  async (event) => {
    console.log("response" , response)  
    if(response)
    {
-   //  showMessage({message: "Registration Successful", type: "success" ,color: "green"})
+    toast.success("Login Successful")
   
    window.location.href = "/homepage";
    }
    else
-   {
-    // showMessage({message: "Registration Failed", type: "danger", color: "red"})
+   {//stub for later in depth error messages
+    toast.error("Login Failed")
+    this.setState({username: '', password: ''})
    }
    console.log("response" , response)
 } catch (error) {
    console.log("error", error)
-  // showMessage({message: "Registration Failed", type: "danger", color: "red"})
+    toast.error("Login Failed")
+    this.setState({username: '', password: ''})
 }
 }
 
@@ -59,7 +62,12 @@ handleSubmit =  async (event) => {
   render() {
    
     return (
-      <div className="container">
+      
+      <div className="container" >
+        <div>
+        <h1 style={{color: "#e87a66",fontFamily: "cursive" ,fontSize:100}}>RustyVault</h1>
+        <h6 style={{color: "#e87a66",fontFamily: "cursive"}}>v 0.0.1</h6>
+        </div>
         <div className="form-box">
           <div className="header-form">
             <br></br>
@@ -85,6 +93,7 @@ handleSubmit =  async (event) => {
                   className="form-control"
                   placeholder="Username"
                   required minLength="3"
+                  value = {this.state.username}
                   onChange={this.handleUsernameChange}
                 />
               </div>
@@ -96,6 +105,7 @@ handleSubmit =  async (event) => {
                   className="form-control"
                   placeholder="Password"
                   required minLength = "8" 
+                  value = {this.state.password}
                   onChange={this.handlePasswordChange}
                 />
               </div>
@@ -121,6 +131,7 @@ handleSubmit =  async (event) => {
                 </div>
               </div>
             </form>
+            <ToastContainer />
           </div>
         </div>
       </div>
