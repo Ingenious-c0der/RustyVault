@@ -72,12 +72,31 @@ button {
 }
 
 button:hover {
-  border-color: #396cd8;
+  border-color: #0a020044;
+  background-color:#610b00d0;
+  transition: 0.7s;
 }
 
 input,
 button {
   outline: none;
+}
+
+
+Card.Img{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  width:100%;
+  background-color:rgba(0,0,0,0.5);
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:1;
+  opacity:0;
+  transition:all 0.3s ease;
+  border-radius: 40px;
 }
 
 #greet-input {
@@ -100,3 +119,4 @@ button {
     background-color: #0f0f0f98;
   }
 }
+

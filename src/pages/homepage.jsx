@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card,Button} from 'react-bootstrap';
-
+//import font awesome icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -12,15 +13,14 @@ class HomePage extends React.Component {
     render() {
       return (
         <div className="container">
-        <Card style={{ width: '18rem' }}>
-          <Card.Img variant="top" src="https://png.pngtree.com/png-clipart/20190903/original/pngtree-black-cartoon-key-png-image_4438183.jpg" width = "100px"/>
+        <Card  style={{ overflow:true,opacity:0.9,backgroundColor:"",padding: "10px", width: '15rem' ,border: "solid 3px #540f00" ,borderRadius:"30px"}}>
+          <Card.Img variant="top" style = {{borderRadius:"10px" }}src="https://t3.ftcdn.net/jpg/03/86/50/54/240_F_386505487_omkU0kGEhMa3gQ83rVksoXX41AFFfi0K.jpg" width = "100px"/>
           <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+
+            <div>
+              <Button>Copy to Clipboard</Button>
+            </div>
+            <Button >Reveal</Button>
           </Card.Body>
         </Card>
         </div>
