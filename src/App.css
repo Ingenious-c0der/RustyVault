@@ -1,5 +1,5 @@
 body{
-  background:linear-gradient(to right, rgb(80, 23, 23), rgb(164, 49, 0));
+  background: #181615;
   margin:0;
   padding:0;
   box-sizing:border-box;
@@ -38,7 +38,7 @@ body{
       display:flex;
       flex-direction:column;
       justify-content:flex-start;
-      opacity:0.5;
+      opacity:0.8;
       border-radius:2%;
   }
 .header-form{
@@ -47,6 +47,7 @@ body{
 button{
   margin-top:10px;
   margin-bottom:10px;
+  color: #ff2600;
 }
 .message{
   display:flex;

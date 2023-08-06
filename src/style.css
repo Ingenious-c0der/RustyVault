@@ -1,11 +1,14 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
 
-  color: #0f0f0f;
-  background-color: #f6f6f6;
+  color: #0f0e0e;
+  background-color: #cca0a0;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

@@ -5,6 +5,9 @@ import Image from "next/image";
 import vaultLogo from "../assets/vault.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+
+
 class App extends React.Component {
 
   constructor(props) {
@@ -65,8 +68,8 @@ handleSubmit =  async (event) => {
       
       <div className="container" >
         <div>
-        <h1 style={{color: "#e87a66",fontFamily: "cursive" ,fontSize:100}}>RustyVault</h1>
-        <h6 style={{color: "#e87a66",fontFamily: "cursive"}}>v 0.0.1</h6>
+        <h1 style={{color: "#f33514",fontFamily: "Montserrat" ,fontSize:100}}>Rusty Vault</h1>
+        <h6 style={{color: "#f33514",fontFamily: "cursive"}}>v 0.0.1</h6>
         </div>
         <div className="form-box">
           <div className="header-form">
