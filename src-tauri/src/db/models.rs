@@ -1,5 +1,5 @@
 use crate::schema::pst; 
-use crate::schema::key_table;
+use crate::schema::vault;
 use serde:: {Deserialize, Serialize};
 
 #[derive(Queryable, Serialize, Deserialize, Debug)]
@@ -17,21 +17,27 @@ pub struct NewPst<'a>{
 }
 
 
-
 #[derive(Queryable, Serialize, Deserialize, Debug)]
-pub struct KeyTable{
-    pub id: i32,
+pub struct Vault{
+    pub vault_id: String,
+    pub user_id: i32,
     pub name: String,
     pub key: String,
-    pub user_id: i32,
+    pub icon_path: String,
 }
 
-#[derive(Insertable, Serialize, Deserialize, Debug)]
-#[table_name = "key_table"]
-pub struct NewKeyTable<'a>{
+
+#[derive(Insertable, Serialize, Clone, Debug)]
+#[table_name = "vault"]
+pub struct NewVault<'a>{
+    pub vault_id: &'a str,
+    pub user_id: &'a i32,
     pub name: &'a str,
     pub key: &'a str,
-    pub user_id: i32,
+    pub icon_path: &'a str,
 }
+
+
+
 
 

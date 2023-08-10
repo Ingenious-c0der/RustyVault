@@ -9,68 +9,68 @@ class HomePage extends React.Component {
     this.state = {};
   }
   render() {
-    return (
-      <div className="container">
-        <Card
-          style={{
-            overflow: true,
-            opacity: 0.9,
-            backgroundColor: "",
-            padding: "10px",
-            width: "10rem",
-            border: "solid 3px #540f00",
-            borderRadius: "30px",
-          }}
-        >
-          <Card.Img
-            variant="top"
-            style={{ backgroundColor:"Red",borderRadius: "10px" }}
-            src="https://t3.ftcdn.net/jpg/03/86/50/54/240_F_386505487_omkU0kGEhMa3gQ83rVksoXX41AFFfi0K.jpg"
-            width="80px"
-          />
-          <Card.Body>
-            <row>
-            <Button title ="Copy Password to Clipboard" style = {{marginRight: "16px"}}>
-              <MdContentPaste />
-            </Button>
+    // return (
+    //   <div className="container">
+    //     <Card
+    //       style={{
+    //         overflow: true,
+    //         opacity: 0.9,
+    //         backgroundColor: "",
+    //         padding: "10px",
+    //         width: "10rem",
+    //         border: "solid 3px #540f00",
+    //         borderRadius: "30px",
+    //       }}
+    //     >
+    //       <Card.Img
+    //         variant="top"
+    //         style={{ backgroundColor:"Red",borderRadius: "10px" }}
+    //         src="https://t3.ftcdn.net/jpg/03/86/50/54/240_F_386505487_omkU0kGEhMa3gQ83rVksoXX41AFFfi0K.jpg"
+    //         width="80px"
+    //       />
+    //       <Card.Body>
+    //         <row>
+    //         <Button title ="Copy Password to Clipboard" style = {{marginRight: "16px"}}>
+    //           <MdContentPaste />
+    //         </Button>
            
-            <Button title ="Reveal Password">
-              <MdVisibility />
-            </Button>
-            </row>
-          </Card.Body>
-        </Card>
-        <Card
-          style={{
-            overflow: true,
-            opacity: 0.9,
-            backgroundColor: "",
-            padding: "10px",
-            width: "10rem",
-            border: "solid 3px #540f00",
-            borderRadius: "30px",
-          }}
-        >
-          <Card.Img
-            variant="top"
-            style={{ backgroundColor:"Red",borderRadius: "10px" }}
-            src="https://t3.ftcdn.net/jpg/03/86/50/54/240_F_386505487_omkU0kGEhMa3gQ83rVksoXX41AFFfi0K.jpg"
-            width="80px"
-          />
-          <Card.Body>
-            <row>
-            <Button title ="Copy Password to Clipboard" style = {{marginRight: "16px"}}>
-              <MdContentPaste />
-            </Button>
+    //         <Button title ="Reveal Password">
+    //           <MdVisibility />
+    //         </Button>
+    //         </row>
+    //       </Card.Body>
+    //     </Card>
+    //     <Card
+    //       style={{
+    //         overflow: true,
+    //         opacity: 0.9,
+    //         backgroundColor: "",
+    //         padding: "10px",
+    //         width: "10rem",
+    //         border: "solid 3px #540f00",
+    //         borderRadius: "30px",
+    //       }}
+    //     >
+    //       <Card.Img
+    //         variant="top"
+    //         style={{ backgroundColor:"Red",borderRadius: "10px" }}
+    //         src="https://t3.ftcdn.net/jpg/03/86/50/54/240_F_386505487_omkU0kGEhMa3gQ83rVksoXX41AFFfi0K.jpg"
+    //         width="80px"
+    //       />
+    //       <Card.Body>
+    //         <row>
+    //         <Button title ="Copy Password to Clipboard" style = {{marginRight: "16px"}}>
+    //           <MdContentPaste />
+    //         </Button>
            
-            <Button title ="Reveal Password">
-              <MdVisibility />
-            </Button>
-            </row>
-          </Card.Body>
-        </Card>
-      </div>
-    );
+    //         <Button title ="Reveal Password">
+    //           <MdVisibility />
+    //         </Button>
+    //         </row>
+    //       </Card.Body>
+    //     </Card>
+    //   </div>
+    // );
   }
 }
 export default HomePage;

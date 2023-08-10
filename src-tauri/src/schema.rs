@@ -6,11 +6,12 @@ table! {
     }
 }
 table! {
-    key_table(id)
+    vault(user_id)
     {
-        id -> Integer,
+        vault_id -> Text,
+        user_id -> Integer,
         name -> Text,
         key -> Text,
-        user_id -> Integer,
+        icon_path -> Text,
     }
 }

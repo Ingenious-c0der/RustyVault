@@ -58,6 +58,14 @@ fn login(state: tauri::State<AppState>,name: &str, password: &str) -> bool {
     res
 }
 
+
+
+
+// #[tauri::command]
+// fn passwordGen()
+
+
+
 fn main() {
     let conn = db::establish_connection();
     let state = AppState {

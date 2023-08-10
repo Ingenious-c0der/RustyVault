@@ -19,7 +19,7 @@
 
 .container {
   margin: 0;
-  padding-top: 10vh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,9 +33,6 @@
   transition: 0.75s;
 }
 
-.logo.tauri:hover {
-  filter: drop-shadow(0 0 2em #24c8db);
-}
 
 .row {
   display: flex;
@@ -76,8 +73,8 @@ button {
 
 button:hover {
   border-color: #0a020044;
-  background-color:#610b00d0;
-  transition: 0.7s;
+  background-color:#2e0803d0;
+  transition: 0.2s;
 }
 
 input,
