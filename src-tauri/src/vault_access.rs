@@ -13,6 +13,7 @@ pub fn generate_hash(password: &str) -> String {
         .hash_password(password.as_bytes(), salt.as_ref())
         .unwrap()
         .to_string();
+    //TODO :Remove verifier from here.
     let parsed_hash = PasswordHash::new(&hash).unwrap() ;
     assert!(Argon2::default().verify_password(password.as_bytes(), &parsed_hash).is_ok());
     println!("Generated Hash: {}", hash); 

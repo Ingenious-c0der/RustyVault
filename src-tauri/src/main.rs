@@ -14,6 +14,8 @@ use diesel::prelude::*;
 pub mod vault_access;
 pub mod db; 
 pub mod schema;
+pub mod key_store;
+pub mod hash_etching;
 
 
 //something here throws state not managed error by tauri

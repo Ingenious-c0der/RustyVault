@@ -1,6 +1,0 @@
-add a vault cluster to view bucket vaults into different categories
-
-this would require adding a group id to each vault 
-by default it would go in the base vault group unless specified 
-the vault cluster names wil be visible in the side pane of the application 
-and clicking on it you can view the vaults in that cluster
