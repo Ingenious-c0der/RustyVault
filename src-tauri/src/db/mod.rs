@@ -26,11 +26,18 @@ pub fn establish_connection() -> SqliteConnection {
 }
 
 
-pub fn insert_pst<'a>(conn: &SqliteConnection, name: &'a str, password: &'a str) -> String {
+pub fn insert_pst<'a>(conn: &SqliteConnection, username: &'a str, upassword: &'a str) -> String {
     
+    // Check if the username already exists
+    let existing_user = pst::table.filter(pst::name.eq(username)).first::<Pst>(conn).optional();
+    
+    if existing_user.unwrap().is_some() {
+        return String::from("User already exists");
+    }
+
     let new_pst = NewPst {
-        name,
-        password
+        name:username,
+        password:upassword
     };
     let res = diesel::insert_into(pst::table)
         .values(&new_pst)
@@ -45,10 +52,15 @@ pub fn get_pst<'a>(conn: &SqliteConnection , username: &'a  str ) ->Result<Strin
     use crate::schema::pst::dsl::*;
     let res = pst.filter(name.eq(username)).load::<Pst>(conn).expect("Error loading pst");
     //handle the not matched case 
-    if res.len() == 0{
+    if res.len() == 0 {
         return Err("No user found".into());
     }
-    let res_json = serde_json::to_string(&res[0].password).unwrap();
+    use::serde_json::json;
+    let json_obj = json!({
+        "id":res[0].id,
+        "password":res[0].password
+    });
+    let res_json = serde_json::to_string(&json_obj).unwrap();
     Ok(res_json)
 }
 

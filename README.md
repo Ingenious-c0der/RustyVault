@@ -41,5 +41,9 @@ Rusty Vault is designed to be secure, fast , clean and easy to use.
     [this would require a browser extension]
 
 
+## 6. Shoot emails to user on login attempts
+    add a feature to send an email to the user on login attempts 
+    [this would require a mail server to be setup]
+
 
 

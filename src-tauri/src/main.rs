@@ -22,6 +22,7 @@ pub mod hash_etching;
 
 struct AppState{
     conn  : Mutex<SqliteConnection>,
+    etch_key : Mutex<key_store::EtchedKey>,
 }
 
 #[tauri::command]
@@ -45,17 +46,22 @@ fn register(state: tauri::State<AppState>,name: &str, password: &str) -> bool {
 fn login(state: tauri::State<AppState>,name: &str, password: &str) -> bool {
     println!("Logging in user {0} {1}", name, password);
     let conn = state.conn.lock().unwrap();
-    let pass_hash = db::get_pst(&conn, name).unwrap_or_else({
+    let res_json = db::get_pst(&conn, name).unwrap_or_else({
         |e| {
             println!("Error : {}", e);
             String::from("Error")
         }
     });
+    let res_json: serde_json::Value = serde_json::from_str(&res_json).unwrap();
+    let pass_hash = res_json["password"].to_string();
+    let id = res_json["id"].to_string();
     if pass_hash == "Error" {
         return false;
     }
     let res = vault_access::verify_hash(&pass_hash, password);
     //print the result
+    let etched_key = hash_etching::etch_pass(&id, name, password);
+    state.etch_key.lock().unwrap().set_key(etched_key);
     println!("Login result : {} {} ", res , pass_hash);
     res
 }
@@ -72,6 +78,7 @@ fn main() {
     let conn = db::establish_connection();
     let state = AppState {
         conn: Mutex::new(db::establish_connection()),
+        etch_key: Mutex::new(key_store::EtchedKey::new()),
     };
   diesel_migrations::run_pending_migrations(&conn).expect("Error migrating");
     tauri::Builder::default()
