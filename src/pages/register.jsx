@@ -33,13 +33,14 @@ class Register extends React.Component {
         name: this.state.username,
         password: this.state.password,
       });
-      if (response) {
+      console.log("response", response);
+      if (!response.error) {
         toast.success("Registration Successful");
         window.location.href = "/";
       } else {
-        toast.error("Registration Failed");
+        toast.error(response.message);
       }
-      console.log("response", response);
+    
     } catch (error) {
       toast.error("Registration Failed");
     }

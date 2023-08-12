@@ -18,6 +18,7 @@ pub fn etch_pass(user_id:&str,user_name:&str,password: &str) -> String{
     let password_hash = Pbkdf2.hash_password(password.as_bytes(), &salt).unwrap().to_string(); 
 
     // Verify password against PHC string
+    //remove later
     let parsed_hash = PasswordHash::new(&password_hash).unwrap();
     assert!(Pbkdf2.verify_password(password.as_bytes(), &parsed_hash).is_ok());
     password_hash

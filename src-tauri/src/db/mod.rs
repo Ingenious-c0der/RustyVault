@@ -32,7 +32,7 @@ pub fn insert_pst<'a>(conn: &SqliteConnection, username: &'a str, upassword: &'a
     let existing_user = pst::table.filter(pst::name.eq(username)).first::<Pst>(conn).optional();
     
     if existing_user.unwrap().is_some() {
-        return String::from("User already exists");
+        return String::from("uexists");
     }
 
     let new_pst = NewPst {

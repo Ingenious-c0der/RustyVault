@@ -16,9 +16,7 @@ pub mod db;
 pub mod schema;
 pub mod key_store;
 pub mod hash_etching;
-
-
-//something here throws state not managed error by tauri
+pub mod crypto_process;
 
 struct AppState{
     conn  : Mutex<SqliteConnection>,
@@ -32,14 +30,28 @@ fn greet(name: &str) -> String {
 
 
 #[tauri::command]
-fn register(state: tauri::State<AppState>,name: &str, password: &str) -> bool {
+fn register(state: tauri::State<AppState>,name: &str, password: &str) -> serde_json::Value {
     println!("Registering user {0} {1}", name, password);
     let conn = state.conn.lock().unwrap();
     let hash_value = vault_access::generate_hash(password);
     let res = db::insert_pst(&conn, name, &hash_value);
+    use serde_json::json ; 
+    if res == "uexists"{
+        //return json object with error
+        
+        let res_json = json!({
+            "error":true,
+            "message": "User already exists"
+        });
+        return res_json; 
+    }
     //print the result
     println!("Register result : {}", res);
-    true
+    let res_json = json!({
+        "error":false,
+        "message": "User Registered Successfully"
+    });
+    return res_json;
 }
 
 #[tauri::command]
@@ -67,10 +79,19 @@ fn login(state: tauri::State<AppState>,name: &str, password: &str) -> bool {
 }
 
 
+// the vault json format should be as follows
+// {
+//     name: "xyzx",
+//     data: "the password"
+//     icon: "the icon path"
+// }
+// if data is empty auto gen password
 
 
 // #[tauri::command]
-// fn passwordGen()
+// fn createVault(state: tauri::State<AppState>,vault: serde_json::Value) -> serde_json::Value {
+    
+// }
 
 
 
