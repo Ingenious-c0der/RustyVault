@@ -15,10 +15,12 @@ pub fn etch_pass(user_id:&str,user_name:&str,password: &str) -> String{
  
     // Hash password to PHC string ($pbkdf2-sha256$...)
     //can panic 
+    //limit number of iterations 
     let password_hash = Pbkdf2.hash_password(password.as_bytes(), &salt).unwrap().to_string(); 
 
     // Verify password against PHC string
     //remove later
+     
     let parsed_hash = PasswordHash::new(&password_hash).unwrap();
     assert!(Pbkdf2.verify_password(password.as_bytes(), &parsed_hash).is_ok());
     password_hash

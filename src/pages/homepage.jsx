@@ -4,22 +4,6 @@ import { Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MdVisibility, MdContentPaste } from "react-icons/md";
 
-
-function UserSidebar({ user }) {
-  return (
-    <div className="sidebar">
-      <div className="user-details">
-        <img src={user.profilePicture} alt="Profile" className="profile-picture" />
-        <p className="user-name">{user.name}</p>
-      </div>
-      <button className="logout-button" onClick={handleLogout}>
-        Logout
-      </button>
-    </div>
-  );
-}
-
-
 class HomePage extends React.Component {
   constructor(props) {
     super(props);

@@ -7,7 +7,7 @@ function UserSidebar({ user }) {
         <img src={user.profilePicture} alt="Profile" className="profile-picture" />
         <p className="user-name">{user.name}</p>
       </div>
-      <button className="logout-button" onClick={handleLogout}>
+      <button className="logout-button" onClick={()=>{}}>
         Logout
       </button>
     </div>
