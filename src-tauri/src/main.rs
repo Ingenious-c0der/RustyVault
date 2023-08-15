@@ -74,7 +74,9 @@ fn login(state: tauri::State<AppState>, name: &str, password: &str) -> bool {
     let res = vault_access::verify_hash(&pass_hash, password);
     //print the result
     println!("creating etched key");
-    let etched_key = hash_etching::etch_pass(&id, name, password);
+    let salt_input = format!("{}{}", id, name);
+    let etched_key = hash_etching::etch_pass( password,&salt_input);
+    println!("etched key : {}", etched_key);
     let id_i32 = 0; //id as i32
     if let Some(id) = res_json["id"].as_i64() {
         let id_i32 = id as i32;
@@ -99,9 +101,11 @@ fn login(state: tauri::State<AppState>, name: &str, password: &str) -> bool {
 
 #[tauri::command]
 fn create_vault(state: tauri::State<AppState>, vault: serde_json::Value) -> serde_json::Value {
+    println!("Creating vault : {}", vault); 
     use serde_json::json;
     let etched_key_gaurd = state.etch_key.lock().unwrap();
     let etched_key = etched_key_gaurd.get_key().unwrap();
+    println!("etched key : {}", etched_key);
     if etched_key == "Error" {
         let res_json = json!({
             "error":true,
@@ -122,12 +126,16 @@ fn create_vault(state: tauri::State<AppState>, vault: serde_json::Value) -> serd
                 char::from(random_byte % 94 + 33) // Generate characters from ASCII range 33 to 126
             })
             .collect();
+        println!("Generated password : {}", random_pass);
         password = random_pass;
     };
     let password = password.trim();
     let vault_name = vault["name"].as_str().unwrap().trim();
     let vault_icon = vault["icon"].as_str().unwrap().trim();
+
     let encrypted_pass = crypto_process::encrypt(&password, &etched_key);
+    println!("Encrypted password : {}", encrypted_pass);
+
     let user_id_guard = state.user.lock().unwrap();
     let user_id = user_id_guard.get_id().unwrap();
     let conn = state.conn.lock().unwrap();
@@ -143,6 +151,7 @@ fn create_vault(state: tauri::State<AppState>, vault: serde_json::Value) -> serd
 
 #[tauri::command]
 fn get_password(state: tauri::State<AppState>,vault_id: &str) -> String{
+    println!("Getting password for vault id : {}",vault_id); 
     let etched_key_gaurd = state.etch_key.lock().unwrap();
     let etched_key = etched_key_gaurd.get_key().unwrap();
     if etched_key == "Error" {
@@ -158,6 +167,7 @@ fn get_password(state: tauri::State<AppState>,vault_id: &str) -> String{
     let res_json: serde_json::Value = serde_json::from_str(&res_json).unwrap();
     let encrypted_pass = res_json["key"].to_string();
     let password = crypto_process::decrypt(&encrypted_pass, &etched_key);
+    println!("Password : {}",password);
     password
 
 }
