@@ -75,7 +75,8 @@ fn login(state: tauri::State<AppState>, name: &str, password: &str) -> bool {
     //print the result
     println!("creating etched key");
     let salt_input = format!("{}{}", id, name);
-    let etched_key = hash_etching::etch_pass( password,&salt_input);
+    //let etched_key = hash_etching::etch_pass( password,&salt_input);
+    let etched_key = vault_access::generate_etch_key_mat( password,&salt_input);
     println!("etched key : {}", etched_key);
     let id_i32 = 0; //id as i32
     if let Some(id) = res_json["id"].as_i64() {
