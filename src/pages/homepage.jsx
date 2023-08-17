@@ -15,10 +15,13 @@ class HomePage extends React.Component {
   testEncryption = async(event) =>{
     try{
       event.preventDefault();
+      console.log("test"); 
       const response = await invoke("create_vault", {
-        name: "Gmail",
-        data: "testpassword123",
-        icon: "some_path"
+        vault:{
+            name: "Gmail",
+          data: "testpassword123",
+          icon: "some_path"
+        }
       });
       console.log("response", response);
       if(!response.error){

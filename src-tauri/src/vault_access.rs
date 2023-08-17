@@ -81,7 +81,7 @@ pub fn generate_etch_key_mat(password: &str, salt_str: &str) -> String {
     println!("Generated Hash: {}", hash_string);
     hash_string
 }
-
+//remove intermidiate string conversion for etch key, keep it all u8;32 directly
 //TODO: Check which one is more secure 
 // R2EZXhDPQsIWYr/+2/M9iPK+68pbeGrJd5GRTOhKY8k= (mat_key)
 // versus 

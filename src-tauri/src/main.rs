@@ -68,10 +68,14 @@ fn login(state: tauri::State<AppState>, name: &str, password: &str) -> bool {
     let res_json: serde_json::Value = serde_json::from_str(&res_json).unwrap();
     let pass_hash = res_json["password"].to_string();
     let id = res_json["id"].to_string();
+    println!("ID as string {}", id); 
     if pass_hash == "Error" {
         return false;
     }
     let res = vault_access::verify_hash(&pass_hash, password);
+    if !res{
+        return false ;
+    }; 
     //print the result
     println!("creating etched key");
     let salt_input = format!("{}{}", id, name);

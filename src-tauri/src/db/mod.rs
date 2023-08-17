@@ -67,8 +67,8 @@ pub fn get_pst<'a>(conn: &SqliteConnection , username: &'a  str ) ->Result<Strin
 
 pub fn insert_vault<'a>(conn: &SqliteConnection, user_id: &'a i32, name: &'a str, key: &'a str, icon_path: &'a str) -> Result<String, Box<dyn StdError>> {
     let new_vault = NewVault {
-        user_id,
         vault_id: &generate_vault_id(),
+        user_id : &1,
         name,
         key,
         icon_path,

@@ -1,12 +1,34 @@
 use aes_gcm::aead::{Aead, AeadCore, OsRng};
 use aes_gcm::{Aes256Gcm, KeyInit};
 
+
+
+fn truncate_key(key: &[u8]) -> [u8; 32] {
+    // Hash the key using SHA-256
+    //use sha2::{Digest, Sha256};
+    //TODO: solve the new() fn clash 
+    // let mut hasher = sha2::Sha256::new();
+    // hasher.update(key);
+    // let hash_result = hasher.finalize();
+
+    // Truncate the hash to 32 bytes
+    let mut truncated_key = [0u8; 32];
+    truncated_key.copy_from_slice(&key[..32]);
+
+    truncated_key
+}
+
+
 pub fn encrypt(data: &str, etched_key: &str) -> String {
     let etched_key_bytes = etched_key.as_bytes();
+    let etched_key_bytes = truncate_key(etched_key_bytes);
+    println!("etched_key_bytes: {:?}", etched_key_bytes.len());
     if etched_key_bytes.len() != 32 {
         return Err("Invalid key length").unwrap();
-    }
-
+    };
+    use aes_gcm::aead::generic_array::GenericArray;
+    
+    
     let cipher: aes_gcm::AesGcm<
         aes_gcm::aes::Aes256,
         aes_gcm::aes::cipher::typenum::UInt<
@@ -22,7 +44,7 @@ pub fn encrypt(data: &str, etched_key: &str) -> String {
             >,
             aes_gcm::aead::consts::B0,
         >,
-    > = Aes256Gcm::new(etched_key_bytes.into());
+    > = Aes256Gcm::new(GenericArray::from_slice(&etched_key_bytes));
     let nonce: aes_gcm::aead::generic_array::GenericArray<
         u8,
         aes_gcm::aes::cipher::typenum::UInt<
