@@ -46,4 +46,8 @@ Rusty Vault is designed to be secure, fast , clean and easy to use.
     [this would require a mail server to be setup]
 
 
+## 7. Restore vaults if master password is lost.
+
+
+
 

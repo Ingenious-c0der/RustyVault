@@ -68,7 +68,7 @@ pub fn get_pst<'a>(conn: &SqliteConnection , username: &'a  str ) ->Result<Strin
 pub fn insert_vault<'a>(conn: &SqliteConnection, user_id: &'a i32, name: &'a str, key: &'a str, icon_path: &'a str) -> Result<String, Box<dyn StdError>> {
     let new_vault = NewVault {
         vault_id: &generate_vault_id(),
-        user_id : &1,
+        user_id,
         name,
         key,
         icon_path,
@@ -81,17 +81,26 @@ pub fn insert_vault<'a>(conn: &SqliteConnection, user_id: &'a i32, name: &'a str
     Ok(res_json)
 }
 
-pub fn get_vault<'a>(conn: &SqliteConnection, vault_name: &'a str) -> Result<String, Box<dyn StdError>> {
+pub fn get_vault_key_by_id<'a>(conn: &SqliteConnection, vault_id_recv: &'a str) -> serde_json::Value {
     use crate::schema::vault::dsl::*;
     let res = vault
-        .filter(name.eq(vault_name))
+        .filter(vault_id.eq(vault_id_recv))
         .load::<Vault>(conn)
         .expect("Error loading vault");
     if res.len() == 0 {
-        return Err("No vault found".into());
+        return serde_json::json!({
+            "error":true,
+            "message":"No vault found"
+        });
     }
-    let res_json = serde_json::to_string(&res[0].key).unwrap();
-    Ok(res_json)
+    
+    let res_json = serde_json::json!({
+        "error":false,
+        "message":"Vault found",
+        "key":res[0].key
+    });
+    res_json
+   
 }
 
 pub fn get_all_vaults_by_user_id<'a>(conn: &SqliteConnection, query_user_id: i32) -> Result<Vec<Vault>, Box<dyn StdError>> {

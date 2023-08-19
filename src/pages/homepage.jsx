@@ -9,9 +9,24 @@ import "react-toastify/dist/ReactToastify.css";
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      vaults: [],
+    };
   }
-
+  testAllVaultFetch = async(event) => {
+    try{
+      event.preventDefault();
+      const response = await invoke("get_all_user_vaults", {});
+      console.log("response", response);
+      if(!response.error){
+        toast.success("Vaults Fetched Successfully");
+      }else{
+        toast.error(response.message);
+      }
+    }catch(error){
+      toast.error("Vaults Fetch Failed");
+    }
+  }
   testEncryption = async(event) =>{
     try{
       event.preventDefault();
@@ -33,6 +48,21 @@ class HomePage extends React.Component {
       toast.error("Encryption Failed");
     }
   }
+  testDecryption = async(event)=>{
+    event.preventDefault();
+    console.log("testing decryption");
+    const response = await invoke("get_password", {
+    vaultId:  "8cb5f1a6-aadd-48c6-aa75-7e3047bf8fff"
+  });
+    console.log("response", response);
+    if(!response.error){
+      toast.success("Decryption Successful");
+    }else{
+      toast.error(response.message);
+    }
+
+
+  };
 
 
   render() {
@@ -57,7 +87,7 @@ class HomePage extends React.Component {
           />
           <Card.Body>
             <row>
-            <Button title ="Copy Password to Clipboard" style = {{marginRight: "16px"}}>
+            <Button title ="Copy Password to Clipboard" style = {{marginRight: "16px"}} onClick= {this.testAllVaultFetch}>
               <MdContentPaste />
             </Button>
            
@@ -90,7 +120,7 @@ class HomePage extends React.Component {
               <MdContentPaste />
             </Button>
            
-            <Button title ="Reveal Password">
+            <Button title ="Reveal Password" onClick= {this.testDecryption}>
               <MdVisibility />
             </Button>
             </row>

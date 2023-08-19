@@ -82,14 +82,15 @@ fn login(state: tauri::State<AppState>, name: &str, password: &str) -> bool {
     //let etched_key = hash_etching::etch_pass( password,&salt_input);
     let etched_key = vault_access::generate_etch_key_mat( password,&salt_input);
     println!("etched key : {}", etched_key);
-    let id_i32 = 0; //id as i32
+    let id_i32: i32 ; //id as i32
     if let Some(id) = res_json["id"].as_i64() {
-        let id_i32 = id as i32;
+        id_i32 = id as i32;
         println!("ID as i32: {}", id_i32);
     } else {
         println!("No valid ID found in DB");
         return false;
     }
+    println!(" User id set in the state {}",id_i32); 
     state.etch_key.lock().unwrap().set_key(etched_key);
     state.user.lock().unwrap().set_id(id_i32);
     println!("Login result : {} {} ", res, pass_hash);
@@ -144,7 +145,7 @@ fn create_vault(state: tauri::State<AppState>, vault: serde_json::Value) -> serd
     let user_id_guard = state.user.lock().unwrap();
     let user_id = user_id_guard.get_id().unwrap();
     let conn = state.conn.lock().unwrap();
-    let res = db::insert_vault(&conn, &user_id, &vault_name, &encrypted_pass, &vault_icon).unwrap();
+    let res = db::insert_vault(&conn, &user_id, &vault_name, &encrypted_pass, &vault_icon).unwrap(); // need to return vault-id here
     println!("Vault creation result : {}", res);
     let res_json = json!({
         "error":false,
@@ -163,18 +164,32 @@ fn get_password(state: tauri::State<AppState>,vault_id: &str) -> String{
         return String::from("Error getting etched key");
     };
     let conn = state.conn.lock().unwrap();
-    let res_json = db::get_vault(&conn, vault_id).unwrap_or_else({
-        |e| {
-            println!("Error : {}", e);
-            String::from("Error in getting vault")
-        }
-    });
-    let res_json: serde_json::Value = serde_json::from_str(&res_json).unwrap();
-    let encrypted_pass = res_json["key"].to_string();
-    let password = crypto_process::decrypt(&encrypted_pass, &etched_key);
+    let res_json = db::get_vault_key_by_id(&conn, vault_id); 
+    println!("res_json : {}",res_json);
+    let key_json = &res_json["key"]; 
+    //let res_json: serde_json::Value = serde_json::from_str(&res_json).unwrap();
+    //let encrypted_pass = res_json["ciphertext"].to_string();
+    //res json print -> res_json : "{\"ciphertext\":\"wDrx5+1SJlsc0rXLiUoo4wrZR/v1fUKJHly8XPrpd1wf\",\"nonce\":\"OZ7f4T6Qu6FD47PZ\"}"
+    let password = crypto_process::decrypt(key_json, &etched_key);
     println!("Password : {}",password);
     password
 
+}
+
+#[tauri::command]
+fn get_all_user_vaults(state: tauri::State<AppState>) -> serde_json::Value {
+    println!("Getting all user vaults"); 
+    let user_id_guard = state.user.lock().unwrap();
+    let user_id = user_id_guard.get_id().unwrap();
+    let conn = state.conn.lock().unwrap();
+    let res = db::get_all_vaults_by_user_id(&conn, *user_id).unwrap(); // need to return vault-id here
+    println!("Vaults : {:?}", res);
+    let res_json = serde_json::json!({
+        "error":false,
+        "message": "Vaults found",
+        "vaults":res
+    });
+    return res_json;
 }
 
 fn main() {
@@ -192,8 +207,20 @@ fn main() {
             register,
             login,
             create_vault,
-            get_password
+            get_password,
+            get_all_user_vaults
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+    // use serde_json::Value;
+    // let combined_data_string = "{\"ciphertext\":\"wDrx5+1SJlsc0rXLiUoo4wrZR/v1fUKJHly8XPrpd1wf\",\"nonce\":\"OZ7f4T6Qu6FD47PZ\"}";
+    // // Parse the JSON string into a serde_json::Value object
+    // let combined_data: Value = serde_json::from_str(combined_data_string).unwrap();
+    // println!("combined_data: {}", combined_data);
+    // // Extract nonce and ciphertext strings
+    // let nonce_string = combined_data.get("nonce").and_then(Value::as_str).unwrap_or_default();
+    // let ciphertext_string = combined_data.get("ciphertext").and_then(Value::as_str).unwrap_or_default();
+
+    // println!("Nonce: {}", nonce_string);
+    // println!("Ciphertext: {}", ciphertext_string);
 }
