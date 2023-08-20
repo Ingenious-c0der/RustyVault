@@ -7,6 +7,7 @@ The application is still under development, daily/weekly updates will be pushed 
 
 Rusty Vault is designed to be secure, fast , clean and easy to use.
 
+find more detailed documentation [here](documentation.md)
 
 # TODOs : (open for contributions on the following)
 
