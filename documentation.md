@@ -46,7 +46,8 @@ No, the application is not prone to side channel attacks.
 
 
 # Architecture
-![RustyVault Architecture](images/Rusty_Vault.png)
+![image](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/ea259bfd-46e8-4640-89b1-e40f591fb19d)
+
 The above image shows the overview of the application o address "what is stored where" and "primary interactions". 
 
 ## Frontend
@@ -61,6 +62,23 @@ First the inter component interactions are specified and then each component is 
 
 ### Inter component interactions
 *to be completed soon*
+
+
+### Components / Processes
+*to be completed soon*
+
+![mpsvp](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/e8172c3b-11d9-47ea-917e-11a28b98fabf)
+
+
+![vpdp](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/eea2402b-32f5-4b43-9b7e-5abd33f87f9e)
+
+
+![ekgp](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/faca9400-8a35-4d6c-b771-fa9978d51410)
+
+
+![vpep](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/4f94aa78-d910-46bb-8680-cd0e38ed5c43)
+
+
 
 
 
