@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-//import font awesome icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MdVisibility, MdContentPaste } from "react-icons/md";
 import { invoke } from "@tauri-apps/api/tauri";

@@ -5,10 +5,10 @@ function VaultCard({ vault, onCopyPassword, onViewPassword }) {
     <div className="vault-card">
       <img src={vault.iconPath} alt="Vault Icon" className="vault-icon" />
       <h3 className="vault-name">{vault.name}</h3>
-      <button className="copy-button" onClick={() => onCopyPassword(vault.password)}>
+      <button className="copy-button" onClick={() => onCopyPassword(vault.id)}>
         Copy Password
       </button>
-      <button className="view-button" onClick={() => onViewPassword(vault.password)}>
+      <button className="view-button" onClick={() => onViewPassword(vault.id)}>
         View Password
       </button>
     </div>
