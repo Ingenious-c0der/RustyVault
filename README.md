@@ -1,3 +1,7 @@
+<p align="center"> 
+    <img width="200"  src="https://github.com/Ingenious-c0der/RustyVault/assets/76046349/c3cc0f15-11b4-4d82-844c-afde4d8e60dc" />
+</p>
+
 # RustyVault 
 ### Your local & secure password manager !
 
