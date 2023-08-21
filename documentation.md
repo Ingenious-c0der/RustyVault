@@ -38,17 +38,20 @@ Yes and so are all other things on your device, start with getting an antivirus.
 ### Is this application prone to brute force attacks ?
 Unless you have a matrioshka brain, no.
 
-### Is this application prone to side channel attacks ?
+### Is this application prone to side channel attacks ? 
 [What is a side channel attack ?](https://en.wikipedia.org/wiki/Side-channel_attack)
 
 No, the application is not prone to side channel attacks.
 
 
+### Is this application unhackable? ( ͡° ͜ʖ ͡°)
+To put things into perspective, consider a physical locker in your house. If you have robbers hiding inside your house, they observe the timing pattern/location of the key/shape of the key. All of these can help them to crack the vault without ever needing the key directly from you. But, if you do not have robbers in your house, the vault is secure. Similarly, if you have a key logger or a listner in your system which is graded as secure by you or you leak your master password online, the application is not secure. But if the transaction of the master password to the application by you is done in a safe environment, the application and all of your passwords stored within are completely secure.
+
 
 # Architecture
 ![image](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/ea259bfd-46e8-4640-89b1-e40f591fb19d)
 
-The above image shows the overview of the application o address "what is stored where" and "primary interactions". 
+The above image shows the overview of the application to address "what is stored where" and "primary interactions". 
 
 ## Frontend
 For the average user, the frontend is designed to be simple and as flexible as your word document (so that you can finally stop storing your passwords in it and use something safer instead).
@@ -57,15 +60,34 @@ Next, login with your master password and you will be redirected to the homepage
 
 ## Backend
 
-First the inter component interactions are specified and then each component is specified in detail.
+First the inter component interactions are specified and then each component/process is specified in detail.
 
 
 ### Inter component interactions
-*to be completed soon*
+#### 1. Registration Function and local storage
+The registration process involves, checking if the username already exists in the local storage, specifically in the "pst" table and then allowing the user to create an account.The application supports multiple accounts, each account being absolutely independent of the other. The master password is hashed and then stored against the username in the "pst" table in the local storage.
+
+
+#### 2. Login Function and local storage 
+The Login function requests hash against the username which is supplied by the user, from "pst" table in local storage (if at all it exists within it). Next, the password supplied in hashed using Argon2 and compared with the hash stored in the "pst" table. If the hashes match (verified to have same source/not literal 1:1 string match), the user is logged in and the application is redirected to the homepage. The homepage then requests the vaults associated with the user from the "vaults" table in the local storage. The vaults are then displayed on the homepage.
+
+#### 3. Etch Key Generation on Login and App RunTime State
+A strong standard length key is generated from the master password, this key is used to encrypt the vault passwords before storing them in the database. The key is generated using the [Argon2](https://en.wikipedia.org/wiki/Argon2) algorithm. The key is generated only on login and is not stored anywhere in the database but is temporarily held only in the App RunTime State. The key is generated on login to prevent the key from being stored in the database/persisted. The key is generated using the master password with supplied deterministic salt as username and user id. This etch key is lost as soon as the application is closed. 
+
+
+#### 4. Vault password encryption and local storage
+Once the user enters the password he wishes to have for a particular vault, the password is encrypted using the etch key and then stored in the "vaults" table in the local storage. The vault password is encrypted using the [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) algorithm. The vault password encrypted key is stored in the local storage inside the "vault" table which consists of the following columns:
+1. vault_id (primary key)
+2. vault name
+3. vault password (encrypted)
+4. user_id (foreign key)
+5. vault icon_path
+
+### For more information on the tables used in the database refer to the [database migration sql](migrations/) code.
 
 
 ### Components / Processes
-*to be completed soon*
+I think the following image representations of the processes is simple enough to understand, that's all that goes on with a added bit of to and fro string conversions using base64. 
 
 ![mpsvp](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/e8172c3b-11d9-47ea-917e-11a28b98fabf)
 
