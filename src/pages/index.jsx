@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import Image from "next/image";
-import vaultLogo from "../assets/vault.png";
+import vaultLogo from "../assets/vault_icon.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

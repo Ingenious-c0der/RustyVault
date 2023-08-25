@@ -1,11 +1,11 @@
 /* VaultCard.css */
 .vault-card {
-    background-color: white;
-    border: 1px solid #ccc;
+    background-color: rgb(32, 26, 26);
+    border: 1px solid #720101;
     padding: 20px;
     margin: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(114, 3, 3, 0.733);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,17 +14,28 @@
   .vault-icon {
     width: 50px;
     height: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
   }
   
   .vault-name {
-    font-size: 18px;
+    font-size: 24px;
     margin-bottom: 10px;
+    font-weight: bold;
   }
-  
+
+
+
+  .interaction-buttons {
+    display: flex;
+    flex-direction: row;
+    padding: 3%;
+    align-items: center;
+  }
+
+/*   
   .copy-button,
   .view-button {
-    background-color: #3498db;
+    background-color: #1f0602;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -32,8 +43,8 @@
     border-radius: 3px;
     cursor: pointer;
   }
-  
+  */
   .copy-button {
-    background-color: #2ecc71;
-    margin-bottom: 5px;
-  }
+
+    margin-right: 5px;
+  } 
