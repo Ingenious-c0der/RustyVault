@@ -1,4 +1,12 @@
-# RustyVault 
+<p align="center"> 
+    <img width="200"  src="https://github.com/Ingenious-c0der/RustyVault/assets/76046349/c3cc0f15-11b4-4d82-844c-afde4d8e60dc" />
+</p>
+<p align="center"> 
+    <img width="800"  src="https://github.com/Ingenious-c0der/RustyVault/assets/76046349/7b119fb3-aca3-4372-9569-a68cf4752294" />
+</p>
+
+# RustyVault
+
 ### Your local & secure password manager !
 
 RustyVault is a password manager that stores your passwords locally on your computer. It is written in Rust and uses the Tauri framework to create a cross-platform desktop application. The frontend is written in Next.js and the backend is written in Rust. Strong encryption is provided using local 256 bit key gen and AES-256/RSA encryption.

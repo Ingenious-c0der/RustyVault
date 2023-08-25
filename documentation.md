@@ -1,5 +1,12 @@
 # Rusty Vault Backend Implementation Details 
-#### Use it only if you feel its secure enough for you and your usecase. First lets address some of the questions that might be in your mind when you are thinking of switching to this password manager. For architecture details, skip to the [architecture](#architecture) section.
+
+<p align="center">
+
+  <img src="https://github.com/Ingenious-c0der/RustyVault/assets/76046349/2dbf4bc8-e10f-49a6-a209-9933ea9cae1c" />
+</p>
+
+
+#### First, lets address some of the questions that might be in your mind when you are thinking of switching to this password manager. For architecture details, skip to the [architecture](#architecture) section.
 
 
 
