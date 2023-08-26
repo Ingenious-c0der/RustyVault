@@ -6,7 +6,8 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import VaultCard from "../components/VaultCard/VaultCard";
-import vaultLogo from "../assets/vault_icon.png";
+import SideBar from "../components/SideBar/SideBar";
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -71,13 +72,14 @@ class HomePage extends React.Component {
         <div className="vault-cards">
           {vaults.map(vault => (
             console.log("vault", vault),
+          
+            
             <VaultCard
               vault = {vault}
-              vaultIcon={vaultLogo}
-              
               onCopyPassword={() => {}}
               onRevealPassword={() => this.revealPassword(vault.vault_id)}
             />
+         
           ))}
         </div>
       </div>
