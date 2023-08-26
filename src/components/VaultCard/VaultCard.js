@@ -7,14 +7,16 @@ function VaultCard({ vault,onCopyPassword, onRevealPassword }) {
 
   return (
     <div className="vault-card">
-      <Image src={vaultLogo} alt="Vault Logo" width={80} height={80} />
+      <Image src={vaultLogo} alt="Vault Logo" className="vault-logo" />
       <h3 className="vault-name">{vault.name}</h3>
       <div className = "interaction-buttons">
       <button className="copy-button" onClick={() => onCopyPassword(vault.vault_id)}>
         <FontAwesomeIcon icon={faCopy} className="button-icon" />
+        <span className="label-name">Copy Password to Clipboard</span>
       </button>
-      <button className="view-button" title="View Password" onClick={() => onRevealPassword(vault.vault_id)}>
+      <button className="view-button" onClick={() => onRevealPassword(vault.vault_id)}>
         <FontAwesomeIcon icon={faEye} className="button-icon" />
+        <span className="label-name">View Password</span>
       </button>
       </div>
     </div>

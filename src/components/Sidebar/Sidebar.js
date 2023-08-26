@@ -5,7 +5,7 @@ function UserSidebar({ user }) {
     <div className="sidebar">
       <div className="user-details">
         <img src={""} alt="Profile" className="profile-picture" />
-        <p className="user-name">{user.name}</p>
+        <p className="user-name">SAGAR  </p>
       </div>
       <button className="logout-button" onClick={()=>{}}>
         Logout

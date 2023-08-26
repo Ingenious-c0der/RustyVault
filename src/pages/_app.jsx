@@ -1,5 +1,6 @@
 import "../style.css";
 import "../App.css";
+import "../pages/styles/HomePage.css";
 import '../components/VaultCard/VaultCard.css';
 import '../components/SideBar/SideBar.css';
 import { ReactNotifications } from 'react-notifications-component'

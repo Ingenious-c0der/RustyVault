@@ -10,11 +10,13 @@
     flex-direction: column;
     align-items: center;
   }
-  
-  .vault-icon {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 3px;
+.vault-card:hover{
+  box-shadow: 0 2px 100px rgba(114, 3, 3, 0.733);
+}
+  .vault-logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1px;
   }
   
   .vault-name {
@@ -32,24 +34,28 @@
     align-items: center;
   }
 
-/*   
-  .copy-button,
-  .view-button {
-    background-color: #1f0602;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    margin-top: 5px;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  */
+
   .copy-button {
 
     margin-right: 5px;
   } 
 
-  .button-icon:hover{
-    color: #720101;
-
+  .view-button:hover .label-name {
+    opacity: 1;
+  }
+  .copy-button:hover .label-name {
+    opacity: 1;
+  }
+  .label-name {
+    position: absolute;
+    transform: translateX(-50%);
+    background-color: rgba(92, 5, 2, 0.8);
+    color: #fff0f0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s;
+    white-space: pre;
   }

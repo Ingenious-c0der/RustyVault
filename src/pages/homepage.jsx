@@ -72,8 +72,6 @@ class HomePage extends React.Component {
         <div className="vault-cards">
           {vaults.map(vault => (
             console.log("vault", vault),
-          
-            
             <VaultCard
               vault = {vault}
               onCopyPassword={() => {}}

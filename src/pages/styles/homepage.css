@@ -1,0 +1,14 @@
+.vault-cards {
+    display: flex;
+    flex-direction: row;
+    /* grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  } */
+}
+  /* Add responsive styles with media queries */
+  @media screen and (max-width: 768px) {
+    .vault-cards {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+  
