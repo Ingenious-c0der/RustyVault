@@ -9,13 +9,15 @@ import VaultCard from "../components/VaultCard/VaultCard";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 import AddVaultForm from "../components/AddVaultForm/Addvaultform";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
+import clipboardCopy from "clipboard-copy";
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       vaults: [],
       showAddForm: false,
-      searchQuery: '',
+      searchQuery: "",
     };
   }
   componentDidMount() {
@@ -31,15 +33,15 @@ class HomePage extends React.Component {
       showAddForm: !prevState.showAddForm,
     }));
   };
-  createVault = async ( vault_json) => {
+  createVault = async (vault_json) => {
     try {
-      console.log("creating vault")
+      console.log("creating vault");
       console.log(vault_json);
-      const response = await invoke("create_vault", {vault :  vault_json });
+      const response = await invoke("create_vault", { vault: vault_json });
       console.log("response", response);
       if (!response.error) {
         toast.success("Vault Created Successfully");
-        this.setState({ showAddForm: false});
+        this.setState({ showAddForm: false });
         this.fetchAllVaults();
       } else {
         toast.error(`Something Went Wrong ${response.message}`);
@@ -64,6 +66,21 @@ class HomePage extends React.Component {
       toast.error("Vaults Fetch Failed");
     }
   };
+  copyPassToClipboard = async (vault_id) => {
+    console.log("testing copy to clip");
+    const response = await invoke("get_password", {
+      vaultId: vault_id,
+    });
+    console.log("response", response);
+    
+    if (response) {
+      clipboardCopy(response);
+      toast.success("Password Copied to clipboard");
+    } else {
+      toast.error("Could not copy Pass to clipboard");
+    }
+  };
+   
 
   revealPassword = async (vault_id) => {
     console.log("testing decryption");
@@ -71,21 +88,24 @@ class HomePage extends React.Component {
       vaultId: vault_id,
     });
     console.log("response", response);
+
     if (!response.error) {
       toast.success("Decryption Successful");
+      return response;
     } else {
       toast.error(response.message);
+      return "Error Decrypting!";
     }
   };
 
   render() {
-    const { vaults,showAddForm,searchQuery } = this.state;
+    const { vaults, showAddForm, searchQuery } = this.state;
     const filteredVaults = vaults.filter((vault) =>
       vault.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     console.log("vaults", vaults);
     return (
-      <div className="container">
+      <div className="main-container">
         <div className="search-bar">
           <FontAwesomeIcon icon={faSearch} className="search-icon" />
           <input
@@ -95,33 +115,39 @@ class HomePage extends React.Component {
             onChange={this.handleSearchChange}
           />
         </div>
+        <div className="sub-container">
+        <Sidebar />
+        
         <div className="homepage-container">
-         
-        <button className="plus-button" onClick={this.toggleAddForm}>
-          <FontAwesomeIcon icon={faPlus} />
-        </button>
-        {showAddForm && (
-          <div className="overlay">
-            <AddVaultForm 
-            onAddVault={this.createVault}
-            toggleFunc={this.toggleAddForm}/>
-          </div>
-        )}
-        <div className="vault-cards">
-          {filteredVaults.map(
-            (vault) => (
-              console.log("vault", vault),
-              (
-                <VaultCard
-                  vault={vault}
-                  onCopyPassword={() => {}}
-                  onRevealPassword={() => this.revealPassword(vault.vault_id)}
-                />
-              )
-            )
+          <button className="plus-button" onClick={this.toggleAddForm}>
+            <FontAwesomeIcon icon={faPlus} />
+          </button>
+          {showAddForm && (
+            <div className="overlay">
+              <AddVaultForm
+                onAddVault={this.createVault}
+                toggleFunc={this.toggleAddForm}
+              />
+            </div>
           )}
+          <div className="vault-cards">
+            {filteredVaults.map(
+              (vault) => (
+                console.log("vault", vault),
+                (
+                  <VaultCard
+                    key={vault.vault_id} 
+                    vault={vault}
+                    onCopyPassword={() => this.copyPassToClipboard(vault.vault_id)}
+                    onRevealPassword={() => this.revealPassword(vault.vault_id)}
+                  />
+                )
+              )
+            )}
+          </div>
         </div>
         </div>
+        <ToastContainer />
       </div>
     );
   }

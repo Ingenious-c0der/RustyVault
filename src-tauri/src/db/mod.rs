@@ -109,5 +109,6 @@ pub fn get_all_vaults_by_user_id<'a>(conn: &SqliteConnection, query_user_id: i32
         .filter(user_id.eq(query_user_id))
         .load::<Vault>(conn)
         .expect("Error loading vaults");
+    //TODO:remove key from all vaults
     Ok(vaults)
 }

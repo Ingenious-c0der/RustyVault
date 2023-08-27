@@ -1,14 +1,16 @@
 .sidebar {
 
-  width: 250px;
-  background-color: #333;
+  width: 200px;
+  background-color: #1f1a1a;
   color: #fff;
   left:0; 
   height: 100%;
   position: fixed;
   overflow-x: hidden;
   transition: 0.5s;
+  flex: 0 0 500px;
   padding-top: 60px;
+  border-right: 1px solid #570404;
 }
 
 .sidebar-menu {
@@ -27,5 +29,5 @@
 }
 
 .sidebar-menu-item:hover {
-  background-color: #444;
+  background-color: #571818;
 }

@@ -1,18 +1,21 @@
 /* VaultCard.css */
 .vault-card {
-  background-color: rgb(32, 26, 26);
+  background-color: rgb(41, 37, 37,0.5);
   border: 1px solid #720101;
-  padding: 20px;
+  padding: 10px;
   margin: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(114, 3, 3, 0.733);
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 .vault-card:hover {
-  box-shadow: 0 2px 60px rgba(255, 30, 30, 0.733);
+  box-shadow: 0 2px 30px rgba(194, 0, 0, 0.788);
 }
+
+
 .vault-logo {
   width: 100px;
   height: auto; 
@@ -27,6 +30,7 @@
 }
 
 .interaction-buttons {
+  transform-style: preserve-3d;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -68,4 +72,22 @@
   pointer-events: none;
   transition: opacity 1s;
   white-space: pre;
+}
+
+.password-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(49, 1, 1, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.password {
+  font-size: 18px;
+  font-weight: bold;
 }
