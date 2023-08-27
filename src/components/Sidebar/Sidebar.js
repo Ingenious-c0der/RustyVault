@@ -1,17 +1,16 @@
-import React from 'react';
+// Sidebar.js
+import React from 'react'; 
 
-function UserSidebar({ user }) {
+const Sidebar = () => {
   return (
     <div className="sidebar">
-      <div className="user-details">
-        <img src={""} alt="Profile" className="profile-picture" />
-        <p className="user-name">SAGAR  </p>
-      </div>
-      <button className="logout-button" onClick={()=>{}}>
-        Logout
-      </button>
+      <ul className="sidebar-menu">
+        <li className="sidebar-menu-item">Dashboard</li>
+        <li className="sidebar-menu-item">Vaults</li>
+        {/* Add more menu items as needed */}
+      </ul>
     </div>
   );
-}
+};
 
-export default UserSidebar;
+export default Sidebar;

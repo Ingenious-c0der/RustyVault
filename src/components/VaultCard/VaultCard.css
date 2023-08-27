@@ -1,61 +1,69 @@
 /* VaultCard.css */
 .vault-card {
-    background-color: rgb(32, 26, 26);
-    border: 1px solid #720101;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(114, 3, 3, 0.733);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-.vault-card:hover{
-  box-shadow: 0 2px 100px rgba(114, 3, 3, 0.733);
+  background-color: rgb(32, 26, 26);
+  border: 1px solid #720101;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(114, 3, 3, 0.733);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-  .vault-logo {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 1px;
-  }
-  
-  .vault-name {
-    font-size: 24px;
-    margin-bottom: 10px;
-    margin-top : 0px;
-    font-weight: bold;
-  }
+.vault-card:hover {
+  box-shadow: 0 2px 60px rgba(255, 30, 30, 0.733);
+}
+.vault-logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1px;
+}
 
+.vault-name {
+  font-size: 24px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  font-weight: bold;
+}
 
+.interaction-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
-  .interaction-buttons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
+.copy-button {
+  margin-right: 5px;
+}
+.settings-button {
+  margin-left: 5px;
+}
+.copy-button:hover,
+.settings-button:hover,
+.view-button:hover {
+  color: #fff0f0;
+}
 
-
-  .copy-button {
-
-    margin-right: 5px;
-  } 
-
-  .view-button:hover .label-name {
-    opacity: 1;
-  }
-  .copy-button:hover .label-name {
-    opacity: 1;
-  }
-  .label-name {
-    position: absolute;
-    transform: translateX(-50%);
-    background-color: rgba(92, 5, 2, 0.8);
-    color: #fff0f0;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 14px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1s;
-    white-space: pre;
-  }
+.view-button:hover .label-name {
+  opacity: 1;
+}
+.copy-button:hover .label-name {
+  opacity: 1;
+}
+.settings-button:hover .label-name {
+  opacity: 1;
+}
+.label-name {
+  position: absolute;
+  top: 52%;
+  transform: translateX(-50%);
+  background-color: rgba(92, 5, 2, 0.8);
+  color: #fff0f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s;
+  white-space: pre;
+}
