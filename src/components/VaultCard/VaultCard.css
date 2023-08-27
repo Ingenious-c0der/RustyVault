@@ -15,7 +15,7 @@
 }
 .vault-logo {
   width: 100px;
-  height: 100px;
+  height: auto; 
   margin-bottom: 1px;
 }
 
@@ -30,6 +30,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative; 
 }
 
 .copy-button {
@@ -55,7 +56,8 @@
 }
 .label-name {
   position: absolute;
-  top: 52%;
+  top:-14px; 
+ 
   transform: translateX(-50%);
   background-color: rgba(92, 5, 2, 0.8);
   color: #fff0f0;

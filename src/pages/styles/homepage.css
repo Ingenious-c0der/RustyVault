@@ -1,10 +1,17 @@
+.homepage-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 100%;
+  overflow: hidden;
+}
+
 .vault-cards {
-    display: flex;
-    flex-direction: row;
-    max-width: 700px;
-    /* grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px; */
-  
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px); /* Adjust the value to make room for header and buttons */
 }
   /* Add responsive styles with media queries */
   @media screen and (max-width: 768px) {
@@ -64,9 +71,16 @@
     border: 1px solid #ccc; /* Change border color to white when focused */
   }
   
-  .homepage-container{
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-
+  .vault-cards::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .vault-cards::-webkit-scrollbar-thumb {
+    background-color: rgba(168, 3, 3, 0.384);
+    border-radius: 4px;
+  }
+  
+  .vault-cards::-webkit-scrollbar-track {
+    background-color: transparent;
+    
   }

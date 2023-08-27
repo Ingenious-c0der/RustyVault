@@ -11,7 +11,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@tauri-apps/api": "^1.2.0",
+    "@tauri-apps/api": "^1.4.0",
     "bootstrap": "^5.2.3",
     "dotenv": "^16.3.1",
     "next": "^13.0.0",
@@ -25,6 +25,6 @@
     "react-toastify": "^9.1.1"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.2.2"
+    "@tauri-apps/cli": "^1.4.0"
   }
 }

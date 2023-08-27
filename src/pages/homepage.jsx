@@ -80,12 +80,13 @@ class HomePage extends React.Component {
 
   render() {
     const { vaults,showAddForm,searchQuery } = this.state;
-
+    const filteredVaults = vaults.filter((vault) =>
+      vault.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
     console.log("vaults", vaults);
     return (
       <div className="container">
-        <div className="homepage-container">
-         <div className="search-bar">
+        <div className="search-bar">
           <FontAwesomeIcon icon={faSearch} className="search-icon" />
           <input
             type="text"
@@ -94,6 +95,8 @@ class HomePage extends React.Component {
             onChange={this.handleSearchChange}
           />
         </div>
+        <div className="homepage-container">
+         
         <button className="plus-button" onClick={this.toggleAddForm}>
           <FontAwesomeIcon icon={faPlus} />
         </button>
@@ -105,7 +108,7 @@ class HomePage extends React.Component {
           </div>
         )}
         <div className="vault-cards">
-          {vaults.map(
+          {filteredVaults.map(
             (vault) => (
               console.log("vault", vault),
               (

@@ -1,10 +1,13 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faCopy, faCog } from '@fortawesome/free-solid-svg-icons';
-import vaultLogo from "./vault_images/vault_icon.png";
+// import vaultLogo from "./vault_images/vault_icon.png";
+
 import Image from "next/image";
 function VaultCard({ vault,onCopyPassword, onRevealPassword }) {
-
+  console.log(vault);
+  const iconNum = vault.icon_path; 
+  const vaultLogo = require(`./vault_images/vault-${iconNum}.png`);
   return (
     <div className="vault-card">
       <Image src={vaultLogo} alt="Vault Logo" className="vault-logo" />

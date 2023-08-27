@@ -137,8 +137,10 @@ fn create_vault(state: tauri::State<AppState>, vault: serde_json::Value) -> serd
     };
     let password = password.trim();
     let vault_name = vault["name"].as_str().unwrap().trim();
-    let vault_icon = vault["iconPath"].as_str().unwrap().trim();
-
+    //create a random number from 1-11
+    let mut rng = OsRng::default();
+    let random_num: u8 = rng.next_u32() as u8 % 11 + 1;
+    let vault_icon = format!("{}", random_num);
     let encrypted_pass = crypto_process::encrypt(&password, &etched_key);
     println!("Encrypted password : {}", encrypted_pass);
 

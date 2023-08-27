@@ -57,6 +57,8 @@ find more detailed documentation [here](documentation.md)
 
 ## 7. Restore vaults if master password is lost.
 
+## Archive deleted vaults, never really delete vaults unless 2FA'ed by user
+
 
 
 
