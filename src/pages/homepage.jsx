@@ -105,7 +105,9 @@ class HomePage extends React.Component {
     );
     console.log("vaults", vaults);
     return (
-      <div className="main-container">
+      <div className="container">
+        <Sidebar />  
+        <div className="homepage-container">
         <div className="search-bar">
           <FontAwesomeIcon icon={faSearch} className="search-icon" />
           <input
@@ -115,10 +117,6 @@ class HomePage extends React.Component {
             onChange={this.handleSearchChange}
           />
         </div>
-        <div className="sub-container">
-        <Sidebar />
-        
-        <div className="homepage-container">
           <button className="plus-button" onClick={this.toggleAddForm}>
             <FontAwesomeIcon icon={faPlus} />
           </button>
@@ -145,7 +143,6 @@ class HomePage extends React.Component {
               )
             )}
           </div>
-        </div>
         </div>
         <ToastContainer />
       </div>

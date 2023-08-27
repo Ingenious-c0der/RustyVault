@@ -2,21 +2,23 @@
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
-.sub-container {
-  display: flex;
+.homepage-container{
+  
+  flex: 1; 
+  align-items: center;
 }
 .vault-cards {
   /*centre the vault cards */
-  flex:1; 
-  /* margin-left: 80px; */
+  
+  margin-left: 250px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   overflow-y: auto;
   max-width: 1400px;
-  /* max-height: calc(100vh - 100px); */
+  max-height: calc(100vh - 100px);
   /* Adjust the value to make room for header and buttons */
 }
   /* Add responsive styles with media queries */
@@ -54,10 +56,9 @@
     z-index: 999; /* Ensure the overlay is above other content */
   }
   .search-bar {
+    
     margin: 20px 0;
-    top: 10px; 
-    display: flex;
-    align-items: center;
+    top: 0px;
   }
   
   .search-icon {
