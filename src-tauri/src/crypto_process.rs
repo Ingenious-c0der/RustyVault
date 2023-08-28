@@ -1,12 +1,10 @@
 use aes_gcm::aead::{Aead, AeadCore, OsRng};
 use aes_gcm::{Aes256Gcm, KeyInit};
 
-
-
 fn truncate_key(key: &[u8]) -> [u8; 32] {
     // Hash the key using SHA-256
     //use sha2::{Digest, Sha256};
-    //TODO: solve the new() fn clash 
+    //TODO: solve the new() fn clash
     // let mut hasher = sha2::Sha256::new();
     // hasher.update(key);
     // let hash_result = hasher.finalize();
@@ -18,7 +16,6 @@ fn truncate_key(key: &[u8]) -> [u8; 32] {
     truncated_key
 }
 
-
 pub fn encrypt(data: &str, etched_key: &str) -> String {
     let etched_key_bytes = etched_key.as_bytes();
     let etched_key_bytes = truncate_key(etched_key_bytes);
@@ -27,8 +24,7 @@ pub fn encrypt(data: &str, etched_key: &str) -> String {
         return Err("Invalid key length").unwrap();
     };
     use aes_gcm::aead::generic_array::GenericArray;
-    
-    
+
     let cipher: aes_gcm::AesGcm<
         aes_gcm::aes::Aes256,
         aes_gcm::aes::cipher::typenum::UInt<
@@ -104,14 +100,13 @@ pub fn decrypt(combined_data_json: &serde_json::Value, etched_key: &str) -> Stri
         >,
     > = Aes256Gcm::new(GenericArray::from_slice(&etched_key_bytes));
 
-    // Deserialize combined data from JSON    
-    // let combined_data_string_req = "{\"ciphertext\":\"wDrx5+1SJlsc0rXLiUoo4wrZR/v1fUKJHly8XPrpd1wf\",\"nonce\":\"OZ7f4T6Qu6FD47PZ\"}";
+    // Deserialize combined data from JSON
     //hate that I have to do these modifications,assert eq ftw
-    let mut combined_data_string = combined_data_json.to_string(); 
+    let mut combined_data_string = combined_data_json.to_string();
     combined_data_string = combined_data_string.replace("\\", "");
     combined_data_string = combined_data_string.replace("\"{", "{");
     combined_data_string = combined_data_string.replace("}\"", "}");
-    println!("combined_data_string: {}", combined_data_string); 
+    println!("combined_data_string: {}", combined_data_string);
     // println!("combined_data_string_req: {}", combined_data_string_req);
     // assert_eq!(combined_data_string.len(), combined_data_string_req.len());
     // assert_eq!(combined_data_string, combined_data_string_req);

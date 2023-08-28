@@ -31,3 +31,30 @@
 .sidebar-menu-item:hover {
   background-color: #571818;
 }
+
+.username {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.profile-icon {
+  width: 150px;
+  height: 150px;
+  border-radius: 20%;
+  object-fit: cover;
+}
+.logout-container {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.logout-button {
+  
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}

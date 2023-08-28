@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddVaultForm = ({ onAddVault,toggleFunc}) => {
+const AddVaultForm = ({ onAddVault, toggleFunc }) => {
   var [iconPath, setIconPath] = useState('something');
   const [vaultName, setVaultName] = useState('');
   const [password, setPassword] = useState('');
@@ -38,16 +38,17 @@ const AddVaultForm = ({ onAddVault,toggleFunc}) => {
         Password
         <input
           type="password"
+          placeholder="leave this blank to auto generate"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
+
         />
       </label>
       <div>
         <button type="button" onClick={toggleFunc}>Cancel</button>
         <button type="submit">Add Vault</button>
       </div>
-      
+
     </form>
   );
 };

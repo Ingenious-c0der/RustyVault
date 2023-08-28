@@ -10,16 +10,18 @@ import Sidebar from "../components/Sidebar/Sidebar.js";
 import AddVaultForm from "../components/AddVaultForm/Addvaultform";
 import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 import clipboardCopy from "clipboard-copy";
-
+import emptyVaultImage from "../components/VaultCard/vault_images/vault-4.png";
+import Image from "next/image";
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       vaults: [],
+      username : '',
       showAddForm: false,
       searchQuery: "",
     };
-  }
+ }
   componentDidMount() {
     this.fetchAllVaults();
   }
@@ -54,11 +56,13 @@ class HomePage extends React.Component {
     try {
       console.log("fetching vaults");
       const response = await invoke("get_all_user_vaults", {});
+      const user_response = await invoke("get_username", {});
       console.log("response", response);
-      if (!response.error) {
+      if (!response.error && !user_response.error) {
         toast.success("Vaults Fetched Successfully");
         console.log("response", response);
-        this.setState({ vaults: response.vaults });
+        this.setState({ vaults: response.vaults, username: user_response.username });
+
       } else {
         toast.error(response.message);
       }
@@ -81,6 +85,25 @@ class HomePage extends React.Component {
     }
   };
    
+  logout = async (event) => {
+ 
+      console.log("logging out");
+      // const response = await invoke("logout", {});
+      // console.log("response", response);
+      // if (!response.error) {
+        //doesn't need a logout function as of now in rust backend
+        toast.success("Logout Successful");
+        window.location.href = "/";
+    //   } else {
+    //     toast.error(response.message);
+    //   }
+    // } catch (error) {
+    //   toast.error("Logout Failed");
+    // }
+  };
+
+
+
 
   revealPassword = async (vault_id) => {
     console.log("testing decryption");
@@ -106,7 +129,10 @@ class HomePage extends React.Component {
     console.log("vaults", vaults);
     return (
       <div className="container">
-        <Sidebar />  
+        <Sidebar 
+        onLogout={this.logout}
+        username={this.state.username}
+        />  
         <div className="homepage-container">
         <div className="search-bar">
           <FontAwesomeIcon icon={faSearch} className="search-icon" />
@@ -129,19 +155,21 @@ class HomePage extends React.Component {
             </div>
           )}
           <div className="vault-cards">
-            {filteredVaults.map(
-              (vault) => (
-                console.log("vault", vault),
-                (
-                  <VaultCard
-                    key={vault.vault_id} 
-                    vault={vault}
-                    onCopyPassword={() => this.copyPassToClipboard(vault.vault_id)}
-                    onRevealPassword={() => this.revealPassword(vault.vault_id)}
-                  />
-                )
-              )
-            )}
+          {vaults.length === 0 ? (
+          <div className="empty-vaults-message">
+            <Image src={emptyVaultImage} alt="Empty Vaults" className="empty-vaults-image" />
+            <p>It's lonely here, click on the plus button in the bottom right to add your first vault!</p>
+          </div>
+        ) : (
+          filteredVaults.map((vault) => (
+            <VaultCard
+              key={vault.vault_id} 
+              vault={vault}
+              onCopyPassword={() => this.copyPassToClipboard(vault.vault_id)}
+              onRevealPassword={() => this.revealPassword(vault.vault_id)}
+            />
+          ))
+        )}
           </div>
         </div>
         <ToastContainer />

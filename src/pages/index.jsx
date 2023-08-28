@@ -125,14 +125,7 @@ handleSubmit =  async (event) => {
                 Register
               </button>
 
-              <div className="message">
-                <div>
-                  <input type="checkbox" /> Remember ME
-                </div>
-                <div>
-                  <a href="#">Forgot your password</a>
-                </div>
-              </div>
+              
             </form>
             <ToastContainer />
           </div>

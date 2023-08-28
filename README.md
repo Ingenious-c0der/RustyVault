@@ -17,6 +17,17 @@ Rusty Vault is designed to be secure, fast , clean and easy to use.
 
 find more detailed documentation [here](documentation.md)
 
+
+## First Release is very close, stay tuned !
+#### Changes pending before v1 launch
+- fix/standardize vault images
+- fuse edit and delete vault functions
+- fix styling issues
+- Do not allow vault name clashes
+- code cleanup
+- packaging and final tests
+
+
 # TODOs : (open for contributions on the following)
 
 
