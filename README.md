@@ -23,6 +23,7 @@ find more detailed documentation [here](documentation.md)
 - fix/standardize vault images
 - fuse edit and delete vault functions
 - fix styling issues
+- enter password twice for verification at each stage
 - Do not allow vault name clashes
 - code cleanup
 - packaging and final tests
