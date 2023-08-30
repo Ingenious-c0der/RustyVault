@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
-
+import { ToastContainer, toast } from "react-toastify";
 const AddVaultForm = ({ onAddVault, toggleFunc }) => {
   var [iconPath, setIconPath] = useState('something');
   const [vaultName, setVaultName] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if(password !== confirmPassword){
+      alert("Passwords do not match");
+      //show toast 
+      toast.warn("Passwords do not match", { theme: "dark" });
+      setPassword('');
+      setConfirmPassword('');
+      return;
+    }
 
     const newVault = {
       iconPath,
@@ -21,6 +30,7 @@ const AddVaultForm = ({ onAddVault, toggleFunc }) => {
     setIconPath('');
     setVaultName('');
     setPassword('');
+    setConfirmPassword('');
   };
 
   return (
@@ -44,6 +54,17 @@ const AddVaultForm = ({ onAddVault, toggleFunc }) => {
 
         />
       </label>
+      <label>
+        Confirm Password
+        <input
+          type="password"
+          placeholder="leave this blank to auto generate"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+
+        />
+      </label>
+      <ToastContainer />
       <div>
         <button type="button" onClick={toggleFunc}>Cancel</button>
         <button type="submit">Add Vault</button>

@@ -10,6 +10,7 @@ class Register extends React.Component {
     this.state = {
       username: "",
       password: "",
+      password_confirm: "",
     };
   }
 
@@ -19,6 +20,9 @@ class Register extends React.Component {
   handlePasswordChange = (event) => {
     this.setState({ password: event.target.value });
   };
+  handlePasswordConfirmChange = (event) => {
+    this.setState({ password_confirm: event.target.value });
+  };
   handleSubmit = async (event) => {
     try {
       event.preventDefault();
@@ -27,6 +31,11 @@ class Register extends React.Component {
           theme: "light",
         });
         this.setState({ username: "", password: "" });
+        return;
+      }
+      if (this.state.password !== this.state.password_confirm) {
+        toast.warn("Passwords do not match", { theme: "light" });
+        this.setState({ password: "", password_confirm: "" });
         return;
       }
       const response = await invoke("register", {
@@ -90,6 +99,16 @@ class Register extends React.Component {
                   />
                 </div>
                 <div></div>
+                <div className="input-group mb-3">
+                  <div className="input-group-prepend"></div>
+                  <input
+                    type="password"
+                    className="form-control"
+                    value={this.state.password_confirm}
+                    placeholder="Re enter Password"
+                    onChange={this.handlePasswordConfirmChange}
+                  />
+                </div>
                 <div>
                 <button
                   type="button"
