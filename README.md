@@ -27,7 +27,9 @@ find more detailed documentation [here](documentation.md)
 - Do not allow vault name clashes
 - code cleanup
 - packaging and final tests
-
+  
+### Quick Sneak Peek
+![image](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/7df11f4e-f758-49a9-8187-085d3ed63da2)
 
 # TODOs : (open for contributions on the following)
 
@@ -69,7 +71,7 @@ find more detailed documentation [here](documentation.md)
 
 ## 7. Restore vaults if master password is lost.
 
-## Archive deleted vaults, never really delete vaults unless 2FA'ed by user
+## 8. Archive deleted vaults, never really delete vaults unless 2FA'ed by user
 
 
 
