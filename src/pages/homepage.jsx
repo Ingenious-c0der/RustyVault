@@ -42,14 +42,14 @@ class HomePage extends React.Component {
       const response = await invoke("create_vault", { vault: vault_json });
       console.log("response", response);
       if (!response.error) {
-        toast.success("Vault Created Successfully");
+        toast.success("Vault Created Successfully",{ theme: "dark" });
         this.setState({ showAddForm: false });
         this.fetchAllVaults();
       } else {
-        toast.error(`Something Went Wrong ${response.message}`);
+        toast.error(`Something Went Wrong ${response.message}`, { theme: "dark" });
       }
     } catch (error) {
-      toast.error("Vault Creation Failed");
+      toast.error("Vault Creation Failed", { theme: "dark" });
     }
   };
   fetchAllVaults = async (event) => {
@@ -59,15 +59,15 @@ class HomePage extends React.Component {
       const user_response = await invoke("get_username", {});
       console.log("response", response);
       if (!response.error && !user_response.error) {
-        toast.success("Vaults Fetched Successfully");
+        toast.success("Vaults Fetched Successfully", { theme: "dark" });
         console.log("response", response);
         this.setState({ vaults: response.vaults, username: user_response.username });
 
       } else {
-        toast.error(response.message);
+        toast.error(response.message, { theme: "dark" });
       }
     } catch (error) {
-      toast.error("Vaults Fetch Failed");
+      toast.error("Vaults Fetch Failed", { theme: "dark" });
     }
   };
   copyPassToClipboard = async (vault_id) => {
@@ -79,9 +79,9 @@ class HomePage extends React.Component {
     
     if (response) {
       clipboardCopy(response);
-      toast.success("Password Copied to clipboard");
+      toast.success("Password Copied to clipboard", { theme: "dark" });
     } else {
-      toast.error("Could not copy Pass to clipboard");
+      toast.error("Could not copy Pass to clipboard", { theme: "dark" });
     }
   };
    
@@ -92,7 +92,7 @@ class HomePage extends React.Component {
       // console.log("response", response);
       // if (!response.error) {
         //doesn't need a logout function as of now in rust backend
-        toast.success("Logout Successful");
+        toast.success("Logout Successful", { theme: "dark" });
         window.location.href = "/";
     //   } else {
     //     toast.error(response.message);
@@ -113,10 +113,10 @@ class HomePage extends React.Component {
     console.log("response", response);
 
     if (!response.error) {
-      toast.success("Decryption Successful");
+      toast.success("Decryption Successful", { theme: "dark" });
       return response;
     } else {
-      toast.error(response.message);
+      toast.error(response.message, { theme: "dark" });
       return "Error Decrypting!";
     }
   };

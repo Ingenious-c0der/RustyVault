@@ -28,13 +28,13 @@ class Register extends React.Component {
       event.preventDefault();
       if (this.state.username.length < 3 || this.state.password.length < 3) {
         toast.warn("Username and Password must be at least 3 characters long", {
-          theme: "light",
+          theme: "dark",
         });
         this.setState({ username: "", password: "" });
         return;
       }
       if (this.state.password !== this.state.password_confirm) {
-        toast.warn("Passwords do not match", { theme: "light" });
+        toast.warn("Passwords do not match", { theme: "dark" });
         this.setState({ password: "", password_confirm: "" });
         return;
       }
@@ -44,14 +44,14 @@ class Register extends React.Component {
       });
       console.log("response", response);
       if (!response.error) {
-        toast.success("Registration Successful");
+        toast.success("Registration Successful", { theme: "dark" });
         window.location.href = "/";
       } else {
-        toast.error(response.message);
+        toast.error(response.message, { theme: "dark" });
       }
     
     } catch (error) {
-      toast.error("Registration Failed");
+      toast.error("Registration Failed", { theme: "dark" });
     }
   };
 

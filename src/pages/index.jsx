@@ -33,7 +33,7 @@ handleSubmit =  async (event) => {
    event.preventDefault();
    if(this.state.username.length < 3 || this.state.password.length < 8)
    {
-    toast.error("Invalid Username or Password")
+    toast.error("Invalid Username or Password", { theme: "dark" })
     this.setState({username: '', password: ''})
      return;
    }
@@ -44,19 +44,19 @@ handleSubmit =  async (event) => {
    console.log("response" , response)  
    if(response)
    {
-    toast.success("Login Successful")
+    toast.success("Login Successful", { theme: "dark" })
   
    window.location.href = "/homepage";
    }
    else
    {//stub for later in depth error messages
-    toast.error("Login Failed")
+    toast.error("Login Failed", { theme: "dark" })
     this.setState({username: '', password: ''})
    }
    console.log("response" , response)
 } catch (error) {
    console.log("error", error)
-    toast.error("Login Failed")
+    toast.error("Login Failed", { theme: "dark" })
     this.setState({username: '', password: ''})
 }
 }
