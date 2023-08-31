@@ -20,13 +20,16 @@ find more detailed documentation [here](documentation.md)
 
 ## First Release is very close, stay tuned !
 #### Changes pending before v1 launch
-- fix/standardize vault images
-- fuse edit and delete vault functions
-- fix styling issues
-- enter password twice for verification at each stage -done
-- Do not allow vault name clashes
-- code cleanup
-- packaging and final tests
+
+- [ ] fix/standardize vault images
+- [x] fuse edit and delete vault functions
+- [ ] fix styling issues
+- [x] enter password twice for verification at each stage 
+- [x] Do not allow vault name clashes 
+- [x] Show/Expand name on hover for long names
+- [ ] code cleanup
+- [ ] packaging and final tests
+
   
 ### Quick Sneak Peek
 ![image](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/7df11f4e-f758-49a9-8187-085d3ed63da2)

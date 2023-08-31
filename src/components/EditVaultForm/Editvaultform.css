@@ -1,0 +1,31 @@
+.edit-vault-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .edit-vault-form label {
+    margin-bottom: 8px;
+  }
+  
+  .edit-vault-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .edit-vault-form button {
+    margin-left : 5px;
+    margin-top: 16px;
+    background-color: #721201;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-vault-form button:hover {
+    background-color: #c92306;
+  }

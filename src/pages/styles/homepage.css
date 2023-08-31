@@ -37,16 +37,15 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #2b0b03;
-    color: #fff;
+    background-color: #0f0f0f98; 
+    color:   #ff2600;
     border: none;
-  
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
   .plus-button:hover {
-    background-color: #e75b42;
+    background-color: #2e0803d0;
   }
   .overlay {
     position: fixed;

@@ -174,8 +174,9 @@ fn create_vault(state: tauri::State<AppState>, vault: serde_json::Value) -> serd
 
 #[tauri::command]
 fn edit_vault(state:tauri::State<AppState>, vault: serde_json::Value) -> serde_json::Value {
-    println!("Editing vault : {}", vault); 
+    
     let vault_id_recv = vault["vault_id"].as_str().unwrap().trim();
+    println!("Editing vault with id : {}", vault_id_recv);
     use serde_json::json;
     let etched_key_gaurd = state.etch_key.lock().unwrap();
     let etched_key = etched_key_gaurd.get_key().unwrap();
@@ -214,7 +215,7 @@ fn edit_vault(state:tauri::State<AppState>, vault: serde_json::Value) -> serde_j
     let encrypted_pass = crypto_process::encrypt(&password, &etched_key);
     println!("Encrypted password : {}", encrypted_pass);
     let conn = state.conn.lock().unwrap();
-    let res = db::edit_vault_by_id(&conn, vault_id_recv, vault_name,password,&vault_icon).unwrap(); // need to return vault-id here
+    let res = db::edit_vault_by_id(&conn, vault_id_recv, vault_name,&encrypted_pass,&vault_icon).unwrap(); // need to return vault-id here
     println!("Vault edit result : {}", res);
     
     if res=="1"{
@@ -245,13 +246,13 @@ fn delete_vault(state:tauri::State<AppState>, vault_id:&str) -> serde_json::Valu
     if res=="1"{
         let res_json = json!({
             "error":false,
-            "message": "Vault Created Successfully"
+            "message": "Vault Deleted Successfully"
         });
         return res_json;
     }else{
         let res_json = json!({
             "error":true,
-            "message": "Error in creating vault"
+            "message": "Error in Deleting vault"
         });
         return res_json;
     }
@@ -284,7 +285,7 @@ fn get_all_user_vaults(state: tauri::State<AppState>) -> serde_json::Value {
     let user_id = user_id_guard.get_id().unwrap();
     let conn = state.conn.lock().unwrap();
     let res = db::get_all_vaults_by_user_id(&conn, *user_id).unwrap(); // need to return vault-id here
-    println!("Vaults : {:?}", res);
+    
     let res_json = serde_json::json!({
         "error":false,
         "message": "Vaults found",
