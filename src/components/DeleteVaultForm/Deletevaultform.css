@@ -1,31 +1,31 @@
 .delete-vault-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  
-  .delete-vault-form label {
-    margin-bottom: 8px;
-  }
-  
-  .delete-vault-form input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .delete-vault-form button {
-    margin-left : 5px;
-    margin-top: 16px;
-    background-color: #721201;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .delete-vault-form button:hover {
-    background-color: #c92306;
-  }
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.delete-vault-form label {
+  margin-bottom: 8px;
+}
+
+.delete-vault-form input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.delete-vault-form button {
+  margin-left: 5px;
+  margin-top: 16px;
+  background-color: #721201;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-vault-form button:hover {
+  background-color: #c92306;
+}

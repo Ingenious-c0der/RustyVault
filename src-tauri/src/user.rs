@@ -5,7 +5,10 @@ pub struct User {
 
 impl User {
     pub fn new() -> Self {
-        Self { id: None , name: None}
+        Self {
+            id: None,
+            name: None,
+        }
     }
     pub fn set_id(&mut self, id: i32) {
         self.id = Some(id);
@@ -18,5 +21,9 @@ impl User {
     }
     pub fn get_name(&self) -> Option<&str> {
         self.name.as_deref()
+    }
+    pub fn clear_user(&mut self) {
+        self.name = None;
+        self.id = None;
     }
 }

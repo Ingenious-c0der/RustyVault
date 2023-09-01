@@ -44,17 +44,13 @@ class HomePage extends React.Component {
   };
 
   toggleEditForm = (vault_id, vault_name) => {
-    console.log("toggle edit form filling")
-    console.log(vault_id)
-    console.log(vault_name)
     this.setState((prevState) => ({
       showEditForm: !prevState.showEditForm,
       selectedVaultId: vault_id,
       selectedVaultName: vault_name,
     }));
   };
-    toggleEditFormClose = () => {
-    console.log("toggle edit form empty")
+  toggleEditFormClose = () => {
     this.setState((prevState) => ({
       showEditForm: !prevState.showEditForm,
       selectedVaultId: "",
@@ -69,20 +65,19 @@ class HomePage extends React.Component {
       selectedVaultName: vault_name,
     }));
   };
-    toggleDeleteFormClose = () => {
+  toggleDeleteFormClose = () => {
     this.setState((prevState) => ({
       showDeleteForm: !prevState.showDeleteForm,
       selectedVaultId: "",
-      selectedVaultName:"",
+      selectedVaultName: "",
     }));
   };
 
-
   deleteVault = async (vault_id) => {
     try {
-      console.log("deleting vault");
+      //console.log("deleting vault");
       const response = await invoke("delete_vault", { vaultId: vault_id });
-      console.log("response", response);
+      //console.log("response", response);
       if (!response.error) {
         toast.success("Vault Deleted Successfully", { theme: "dark" });
         this.fetchAllVaults();
@@ -96,10 +91,13 @@ class HomePage extends React.Component {
 
   editVault = async (vault_json) => {
     try {
-      console.log("editing vault");
-      console.log(vault_json);
+      //console.log("editing vault");
+      //console.log(vault_json);
       for (const vault of this.state.vaults) {
-        if (vault.name === vault_json.name && vault.vault_id !== vault_json.vault_id) {
+        if (
+          vault.name === vault_json.name &&
+          vault.vault_id !== vault_json.vault_id
+        ) {
           toast.error("Vault with this name already exists", { theme: "dark" });
           return;
         }
@@ -107,7 +105,7 @@ class HomePage extends React.Component {
       const response = await invoke("edit_vault", {
         vault: vault_json,
       });
-      console.log("response", response);
+      //console.log("response", response);
       if (!response.error) {
         toast.success("Vault Edited Successfully", { theme: "dark" });
         this.fetchAllVaults();
@@ -120,8 +118,8 @@ class HomePage extends React.Component {
   };
   createVault = async (vault_json) => {
     try {
-      console.log("creating vault");
-      console.log(vault_json);
+      //console.log("creating vault");
+      //console.log(vault_json);
       //check if the given vault name already exists
       for (const vault of this.state.vaults) {
         if (vault.name === vault_json.name) {
@@ -130,7 +128,7 @@ class HomePage extends React.Component {
         }
       }
       const response = await invoke("create_vault", { vault: vault_json });
-      console.log("response", response);
+      //console.log("response", response);
       if (!response.error) {
         toast.success("Vault Created Successfully", { theme: "dark" });
         this.setState({ showAddForm: false });
@@ -146,10 +144,10 @@ class HomePage extends React.Component {
   };
   fetchAllVaults = async (event) => {
     try {
-      console.log("fetching vaults");
+      //console.log("fetching vaults");
       const response = await invoke("get_all_user_vaults", {});
       const user_response = await invoke("get_username", {});
-     
+
       if (!response.error && !user_response.error) {
         toast.success("Vaults Fetched Successfully", { theme: "dark" });
         this.setState({
@@ -164,11 +162,11 @@ class HomePage extends React.Component {
     }
   };
   copyPassToClipboard = async (vault_id) => {
-    console.log("testing copy to clip");
+    //console.log("testing copy to clip");
     const response = await invoke("get_password", {
       vaultId: vault_id,
     });
-    console.log("response", response);
+    //console.log("response", response);
 
     if (response) {
       clipboardCopy(response);
@@ -179,27 +177,28 @@ class HomePage extends React.Component {
   };
 
   logout = async (event) => {
-    console.log("logging out");
-    // const response = await invoke("logout", {});
-    // console.log("response", response);
-    // if (!response.error) {
-    //doesn't need a logout function as of now in rust backend
-    toast.success("Logout Successful", { theme: "dark" });
-    window.location.href = "/";
-    //   } else {
-    //     toast.error(response.message);
-    //   }
-    // } catch (error) {
-    //   toast.error("Logout Failed");
-    // }
+    //("logging out");
+    const response = await invoke("logout", {});
+    console.log("response", response);
+    try {
+      if (!response.error) {
+        //doesn't need a logout function as of now in rust backend
+        toast.success("Logout Successful", { theme: "dark" });
+        window.location.href = "/";
+      } else {
+        toast.error(response.message);
+      }
+    } catch (error) {
+      toast.error("Logout Failed");
+    }
   };
 
   revealPassword = async (vault_id) => {
-    console.log("testing decryption");
+    //console.log("testing decryption");
     const response = await invoke("get_password", {
       vaultId: vault_id,
     });
-    console.log("response", response);
+    //console.log("response", response);
 
     if (!response.error) {
       toast.success("Decryption Successful", { theme: "dark" });
@@ -243,10 +242,14 @@ class HomePage extends React.Component {
           {showDeleteForm && (
             <div className="overlay">
               <DeleteVaultForm
-                onDeleteVault={() => this.deleteVault(this.state.selectedVaultId)}
-                toggleFunc={() => {this.toggleDeleteFormClose()}}
-                vaultNameAct = {this.state.selectedVaultName}
-                vaultId = {this.state.selectedVaultId}
+                onDeleteVault={() =>
+                  this.deleteVault(this.state.selectedVaultId)
+                }
+                toggleFunc={() => {
+                  this.toggleDeleteFormClose();
+                }}
+                vaultNameAct={this.state.selectedVaultName}
+                vaultId={this.state.selectedVaultId}
               />
             </div>
           )}
@@ -254,10 +257,11 @@ class HomePage extends React.Component {
             <div className="overlay">
               <EditVaultForm
                 onEditVault={this.editVault}
-                toggleFunc={() => {this.toggleEditFormClose()}}
-                vaultNameAct = {this.state.selectedVaultName}
-                vault_id = {this.state.selectedVaultId}
-
+                toggleFunc={() => {
+                  this.toggleEditFormClose();
+                }}
+                vaultNameAct={this.state.selectedVaultName}
+                vault_id={this.state.selectedVaultId}
               />
             </div>
           )}

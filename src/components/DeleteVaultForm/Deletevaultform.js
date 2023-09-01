@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
-const DeleteVaultForm = ({ vault_id,vaultNameAct,onDeleteVault, toggleFunc }) => {
+const DeleteVaultForm = ({ vault_id, vaultNameAct, onDeleteVault, toggleFunc }) => {
 
   const [vaultName, setVaultName] = useState('');
-  var placeString  =  'Enter ' + vaultNameAct + ' to Confirm';
+  var placeString = 'Enter ' + vaultNameAct + ' to Confirm';
   var [placeHolder, setPlaceHolder] = useState(placeString);
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(vaultName !== vaultNameAct ){
+    if (vaultName !== vaultNameAct) {
       //show toast 
       toast.warn("Vault name is not correct", { theme: "dark" });
       setVaultName('');
@@ -23,7 +23,7 @@ const DeleteVaultForm = ({ vault_id,vaultNameAct,onDeleteVault, toggleFunc }) =>
   return (
     <form className="delete-vault-form" onSubmit={handleSubmit}>
       <label>
-        Confirm Delete Vault {vaultNameAct} ? 
+        Confirm Delete Vault {vaultNameAct} ?
         <input
           type="text"
           placeholder={placeHolder}

@@ -23,8 +23,8 @@ fn pad_to_length(input: &str, target_length: usize) -> String {
 // }
 
 pub fn etch_pass(password: &str, salt_str: &str) -> String {
-    println!("Etching Password");
-    println!("Password {}", password);
+    //println!("Etching Password");
+    //println!("Password {}", password);
 
     let padd_salt_str = pad_to_length(salt_str, 20);
     let salt = Salt::from_b64(&padd_salt_str).unwrap();

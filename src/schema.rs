@@ -20,7 +20,4 @@ diesel::table! {
 
 diesel::joinable!(vault -> pst (user_id));
 
-diesel::allow_tables_to_appear_in_same_query!(
-    pst,
-    vault,
-);
+diesel::allow_tables_to_appear_in_same_query!(pst, vault,);

@@ -42,14 +42,13 @@ class Register extends React.Component {
         name: this.state.username,
         password: this.state.password,
       });
-      console.log("response", response);
+      //console.log("response", response);
       if (!response.error) {
         toast.success("Registration Successful", { theme: "dark" });
         window.location.href = "/";
       } else {
         toast.error(response.message, { theme: "dark" });
       }
-    
     } catch (error) {
       toast.error("Registration Failed", { theme: "dark" });
     }
@@ -110,20 +109,23 @@ class Register extends React.Component {
                   />
                 </div>
                 <div>
+                  <button
+                    type="button"
+                    className="btn btn-secondary btn-block"
+                    onClick={this.handleSubmit}
+                  >
+                    Register
+                  </button>
+                </div>
                 <button
                   type="button"
                   className="btn btn-secondary btn-block"
-                  onClick={this.handleSubmit}
+                  onClick={() => {
+                    window.location.href = "/index";
+                  }}
                 >
-                  Register
-                </button>
-                </div>
-                <button type="button"
-                  className="btn btn-secondary btn-block"
-                  onClick={ ()=>{window.location.href = "/index"}}> 
                   Back
                 </button>
-               
               </form>
               <ToastContainer />
             </div>

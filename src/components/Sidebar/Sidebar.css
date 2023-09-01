@@ -1,9 +1,8 @@
 .sidebar {
-
   width: 200px;
   background-color: #1f1a1a;
   color: #fff;
-  left:0; 
+  left: 0;
   height: 100%;
   position: fixed;
   overflow-x: hidden;
@@ -52,7 +51,6 @@
 }
 
 .logout-button {
-  
   padding: 10px 20px;
   cursor: pointer;
   width: 100%;

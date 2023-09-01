@@ -12,4 +12,7 @@ impl EtchedKey {
     pub fn get_key(&self) -> Option<&str> {
         self.key.as_deref()
     }
+    pub fn clear_key(&mut self) {
+        self.key = None;
+    }
 }

@@ -8,7 +8,7 @@ const AddVaultForm = ({ onAddVault, toggleFunc }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(password !== confirmPassword){
+    if (password !== confirmPassword) {
       alert("Passwords do not match");
       //show toast 
       toast.warn("Passwords do not match", { theme: "dark" });

@@ -10,14 +10,14 @@ function VaultCard({ vault, onCopyPassword, onRevealPassword, toggleEditVault, t
   const handleViewPassword = async () => {
 
     var x = await onRevealPassword(vault.vault_id);
-    console.log(x);
+    //console.log(x);
     setPassword(x);
     setPasswordShown(true);
     setTimeout(() => {
       setPasswordShown(false);
     }, 15000); // Hide after 15 seconds
   };
-  console.log(vault);
+  //console.log(vault);
   const iconNum = vault.icon_path;
   const vaultLogo = require(`./vault_images/vault-${iconNum}.png`);
   const handleToggleDropdown = () => {

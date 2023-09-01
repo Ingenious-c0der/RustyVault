@@ -19,7 +19,6 @@ fn truncate_key(key: &[u8]) -> [u8; 32] {
 pub fn encrypt(data: &str, etched_key: &str) -> String {
     let etched_key_bytes = etched_key.as_bytes();
     let etched_key_bytes = truncate_key(etched_key_bytes);
-    println!("etched_key_bytes: {:?}", etched_key_bytes.len());
     if etched_key_bytes.len() != 32 {
         return Err("Invalid key length").unwrap();
     };
@@ -58,11 +57,6 @@ pub fn encrypt(data: &str, etched_key: &str) -> String {
         >,
     > = Aes256Gcm::generate_nonce(&mut OsRng);
     let ciphertext: Vec<u8> = cipher.encrypt(&nonce, data.as_bytes()).unwrap();
-    let plaintext: Vec<u8> = cipher.decrypt(&nonce, ciphertext.as_ref()).unwrap();
-    let plaintext_string = String::from_utf8(plaintext).unwrap();
-
-    assert_eq!(plaintext_string, data);
-    println!("plaintext: {}", plaintext_string);
     use base64::encode;
     let nonce_string = encode(nonce.as_slice());
     let ciphertext_string = encode(ciphertext.as_slice());
@@ -78,7 +72,6 @@ pub fn encrypt(data: &str, etched_key: &str) -> String {
 pub fn decrypt(combined_data_json: &serde_json::Value, etched_key: &str) -> String {
     let etched_key_bytes = etched_key.as_bytes();
     let etched_key_bytes = truncate_key(etched_key_bytes);
-    println!("etched_key_bytes: {:?}", etched_key_bytes.len());
     if etched_key_bytes.len() != 32 {
         return Err("Invalid key length").unwrap();
     };
@@ -106,7 +99,6 @@ pub fn decrypt(combined_data_json: &serde_json::Value, etched_key: &str) -> Stri
     combined_data_string = combined_data_string.replace("\\", "");
     combined_data_string = combined_data_string.replace("\"{", "{");
     combined_data_string = combined_data_string.replace("}\"", "}");
-    println!("combined_data_string: {}", combined_data_string);
     // println!("combined_data_string_req: {}", combined_data_string_req);
     // assert_eq!(combined_data_string.len(), combined_data_string_req.len());
     // assert_eq!(combined_data_string, combined_data_string_req);
@@ -120,7 +112,7 @@ pub fn decrypt(combined_data_json: &serde_json::Value, etched_key: &str) -> Stri
     // Convert decrypted data to string
     let mut decrypted_data_string = String::from_utf8(decrypted_data).unwrap();
     decrypted_data_string = decrypted_data_string.replace("\"", "");
-    println!("decrypted_data_string: {}", decrypted_data_string);
+    //println!("decrypted_data_string: {}", decrypted_data_string);
     // assert_eq!(decrypted_data_string, "testpassword123");
     decrypted_data_string
 }

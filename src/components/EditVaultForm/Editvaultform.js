@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
-const EditVaultForm = ({ vault_id, vaultNameAct,onEditVault, toggleFunc }) => {
+const EditVaultForm = ({ vault_id, vaultNameAct, onEditVault, toggleFunc }) => {
 
   const [vaultName, setVaultName] = useState(vaultNameAct);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  console.log(vaultNameAct);
+  //console.log(vaultNameAct);
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(password !== confirmPassword){
+    if (password !== confirmPassword) {
       alert("Passwords do not match");
       //show toast 
       toast.warn("Passwords do not match", { theme: "dark" });

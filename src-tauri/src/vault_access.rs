@@ -29,12 +29,15 @@ pub fn generate_hash(password: &str) -> String {
         .hash_password(password.as_bytes(), salt.as_ref())
         .unwrap()
         .to_string();
-    //TODO :Remove verifier from here.
-    let parsed_hash = PasswordHash::new(&hash).unwrap();
-    assert!(Argon2::default()
-        .verify_password(password.as_bytes(), &parsed_hash)
-        .is_ok());
-    println!("Generated Hash: {}", hash);
+
+    #[cfg(debug_assertions)]
+    {
+        let parsed_hash = PasswordHash::new(&hash).unwrap();
+        assert!(Argon2::default()
+            .verify_password(password.as_bytes(), &parsed_hash)
+            .is_ok());
+        //println!("Generated Hash: {}", hash);
+    }
     hash
 }
 
@@ -49,7 +52,7 @@ pub fn verify_hash(hash: &str, password: &str) -> bool {
 pub fn generate_etch(password: &str, salt_str: &str) -> String {
     let padd_salt_str = pad_to_length(salt_str, 20);
     let hashed_padd_salt_str = generate_sha256_hash(&padd_salt_str);
-    println!("Salt custom: {}", hashed_padd_salt_str);
+    //println!("Salt custom: {}", hashed_padd_salt_str);
     let salt = Salt::new(&hashed_padd_salt_str).unwrap();
 
     let argon2 = Argon2::default();
@@ -62,7 +65,7 @@ pub fn generate_etch(password: &str, salt_str: &str) -> String {
     assert!(Argon2::default()
         .verify_password(password.as_bytes(), &parsed_hash)
         .is_ok());
-    println!("Generated Hash: {}", hash);
+    //println!("Generated Hash: {}", hash);
     hash
 }
 
@@ -70,7 +73,7 @@ pub fn generate_etch(password: &str, salt_str: &str) -> String {
 pub fn generate_etch_key_mat(password: &str, salt_str: &str) -> String {
     let padd_salt_str = pad_to_length(salt_str, 20);
     let hashed_padd_salt_str = generate_sha256_hash(&padd_salt_str);
-    println!("Salt custom: {}", hashed_padd_salt_str);
+    //println!("Salt custom: {}", hashed_padd_salt_str);
     let salt = Salt::new(&hashed_padd_salt_str).unwrap();
     let argon2 = Argon2::default();
     let mut output_key_material = [0u8; 32]; // Can be any desired size
@@ -83,7 +86,7 @@ pub fn generate_etch_key_mat(password: &str, salt_str: &str) -> String {
         .unwrap();
     //convert to string
     let hash_string = base64::encode(output_key_material);
-    println!("Generated Hash: {}", hash_string);
+    //println!("Generated Hash: {}", hash_string);
     hash_string
 }
 //remove intermidiate string conversion for etch key, keep it all u8;32 directly

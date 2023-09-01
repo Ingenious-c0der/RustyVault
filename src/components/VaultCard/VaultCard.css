@@ -1,6 +1,6 @@
 /* VaultCard.css */
 .vault-card {
-  background-color: rgb(41, 37, 37,0.5);
+  background-color: rgb(41, 37, 37, 0.5);
   border: 1px solid #720101;
   padding: 10px;
   margin: 10px;
@@ -15,10 +15,9 @@
   box-shadow: 0 2px 30px rgba(194, 0, 0, 0.788);
 }
 
-
 .vault-logo {
   width: 100px;
-  height: auto; 
+  height: auto;
   margin-bottom: 1px;
 }
 
@@ -34,7 +33,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: relative; 
+  position: relative;
 }
 
 .copy-button {
@@ -60,8 +59,8 @@
 }
 .label-name {
   position: absolute;
-  top:-14px; 
- 
+  top: -14px;
+
   transform: translateX(-50%);
   background-color: rgba(92, 5, 2, 0.8);
   color: #fff0f0;
@@ -92,12 +91,11 @@
   font-weight: bold;
 }
 
-
 .dropdown-options {
   position: absolute;
   bottom: 100%;
   right: 0;
-  background-color:  rgba(36, 32, 32, 0.952);
+  background-color: rgba(36, 32, 32, 0.952);
   backdrop-filter: blur(10px);
   border-radius: 4px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -115,14 +113,12 @@
   cursor: pointer;
   color: #ff2600;
   text-align: left;
-  
-
 }
 
 /* Style the dropdown option buttons on hover */
 .dropdown-options button:hover {
   background-color: #2c0404;
-  color : white;
+  color: white;
 }
 
 .vault-name-tooltip {

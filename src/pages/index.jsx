@@ -6,70 +6,65 @@ import vaultLogo from "../assets/vault_icon.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
-
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     };
-  } 
+  }
   handleUsernameChange = (event) => {
+    this.setState({ username: event.target.value });
+  };
+  handlePasswordChange = (event) => {
+    this.setState({ password: event.target.value });
+  };
+  handleSubmit = async (event) => {
+    try {
+      //console.log("submit");
+      event.preventDefault();
+      if (this.state.username.length < 3 || this.state.password.length < 8) {
+        toast.error("Invalid Username or Password", { theme: "dark" });
+        this.setState({ username: "", password: "" });
+        return;
+      }
+      const response = await invoke("login", {
+        name: this.state.username,
+        password: this.state.password,
+      });
+      //console.log("response", response);
+      if (response) {
+        toast.success("Login Successful", { theme: "dark" });
 
-    this.setState({username: event.target.value});
-   
-}
-handlePasswordChange = (event) => {
-
-     this.setState({password: event.target.value});
-     
-}
-handleSubmit =  async (event) => {
-   try{
-   console.log("submit")
-   event.preventDefault();
-   if(this.state.username.length < 3 || this.state.password.length < 8)
-   {
-    toast.error("Invalid Username or Password", { theme: "dark" })
-    this.setState({username: '', password: ''})
-     return;
-   }
-   const response = await invoke("login", {
-       name: this.state.username,
-       password: this.state.password,
-   });
-   console.log("response" , response)  
-   if(response)
-   {
-    toast.success("Login Successful", { theme: "dark" })
-  
-   window.location.href = "/homepage";
-   }
-   else
-   {//stub for later in depth error messages
-    toast.error("Login Failed", { theme: "dark" })
-    this.setState({username: '', password: ''})
-   }
-   console.log("response" , response)
-} catch (error) {
-   console.log("error", error)
-    toast.error("Login Failed", { theme: "dark" })
-    this.setState({username: '', password: ''})
-}
-}
-
+        window.location.href = "/homepage";
+      } else {
+        //stub for later in depth error messages
+        toast.error("Login Failed", { theme: "dark" });
+        this.setState({ username: "", password: "" });
+      }
+      //console.log("response", response);
+    } catch (error) {
+      //console.log("error", error);
+      toast.error("Login Failed", { theme: "dark" });
+      this.setState({ username: "", password: "" });
+    }
+  };
 
   render() {
-   
     return (
-      
-      <div className="container" >
+      <div className="container">
         <div>
-        <h1 style={{color: "#f33514",fontFamily: "Montserrat" ,fontSize:100}}>Rusty Vault</h1>
-        <h6 style={{color: "#f33514",fontFamily: "cursive"}}>v 0.0.1</h6>
+          <h1
+            style={{
+              color: "#f33514",
+              fontFamily: "Montserrat",
+              fontSize: 100,
+            }}
+          >
+            Rusty Vault
+          </h1>
+          <h6 style={{ color: "#f33514", fontFamily: "cursive" }}>v 0.0.1</h6>
         </div>
         <div className="form-box">
           <div className="header-form">
@@ -95,8 +90,9 @@ handleSubmit =  async (event) => {
                   type="text"
                   className="form-control"
                   placeholder="Username"
-                  required minLength="3"
-                  value = {this.state.username}
+                  required
+                  minLength="3"
+                  value={this.state.username}
                   onChange={this.handleUsernameChange}
                 />
               </div>
@@ -107,25 +103,30 @@ handleSubmit =  async (event) => {
                   type="password"
                   className="form-control"
                   placeholder="Password"
-                  required minLength = "8" 
-                  value = {this.state.password}
+                  required
+                  minLength="8"
+                  value={this.state.password}
                   onChange={this.handlePasswordChange}
                 />
               </div>
               <div>
-                <button type="button" className="btn btn-secondary btn-block" onClick = {this.handleSubmit}>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-block"
+                  onClick={this.handleSubmit}
+                >
                   Login
                 </button>
               </div>
               <button
                 type="button"
                 className="btn btn-secondary btn-block"
-                onClick={ ()=>{window.location.href = "/register"}}
+                onClick={() => {
+                  window.location.href = "/register";
+                }}
               >
                 Register
               </button>
-
-              
             </form>
             <ToastContainer />
           </div>
