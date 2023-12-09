@@ -1,4 +1,3 @@
-import { useState } from "react";
 import React from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import Image from "next/image";
@@ -24,7 +23,7 @@ class App extends React.Component {
     try {
       //console.log("submit");
       event.preventDefault();
-      if (this.state.username.length < 3 || this.state.password.length < 8) {
+      if (this.state.username.length < 5 || this.state.password.length < 8) {
         toast.error("Invalid Username or Password", { theme: "dark" });
         this.setState({ username: "", password: "" });
         return;
@@ -40,13 +39,15 @@ class App extends React.Component {
         window.location.href = "/homepage";
       } else {
         //stub for later in depth error messages
+        //add opacity to toast
+      
         toast.error("Login Failed", { theme: "dark" });
         this.setState({ username: "", password: "" });
       }
       //console.log("response", response);
     } catch (error) {
       //console.log("error", error);
-      toast.error("Login Failed", { theme: "dark" });
+      toast.error("Login Failed", { theme: "dark" , style: {opacity : 0.6}});
       this.setState({ username: "", password: "" });
     }
   };

@@ -1,7 +1,5 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MdVisibility, MdContentPaste } from "react-icons/md";
 import { invoke } from "@tauri-apps/api/tauri";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -144,12 +142,11 @@ class HomePage extends React.Component {
   };
   fetchAllVaults = async (event) => {
     try {
-      //console.log("fetching vaults");
       const response = await invoke("get_all_user_vaults", {});
       const user_response = await invoke("get_username", {});
 
       if (!response.error && !user_response.error) {
-        toast.success("Vaults Fetched Successfully", { theme: "dark" });
+        toast.success("Vaults Fetched Successfully", { theme: "dark", style: {opacity : 0.7}});
         this.setState({
           vaults: response.vaults,
           username: user_response.username,
@@ -274,8 +271,8 @@ class HomePage extends React.Component {
                   className="empty-vaults-image"
                 />
                 <p>
-                  It's quite lonely here :(, click on the plus button in the
-                  bottom right to add your first vault!
+                  It's quite lonely here :( click on the plus button in the
+                  bottom right to add your very first vault!
                 </p>
               </div>
             ) : (

@@ -62,9 +62,13 @@ fn login(state: tauri::State<AppState>, name: &str, password: &str) -> bool {
     let res_json = db::get_pst(&conn, name).unwrap_or_else({
         |_e| {
             //println!("Error : {}", e);
-            String::from("Login Error")
+            String::from("ErrorLogin")
+            
         }
     });
+    if res_json == "ErrorLogin" {
+        return false;
+    }
     let res_json: serde_json::Value = serde_json::from_str(&res_json).unwrap();
     let pass_hash = res_json["password"].to_string();
     let id = res_json["id"].to_string();
@@ -121,7 +125,11 @@ fn create_vault(state: tauri::State<AppState>, vault: serde_json::Value) -> serd
         });
         return res_json;
     };
+  
+    let pass_len_str_text = vault["pass_length"].as_str().unwrap_or("15");
+    let pass_length : i32= pass_len_str_text.parse().unwrap();
 
+   
     let mut password = vault["data"].to_string();
     // let  password_rectified = vault["data"].as_str().unwrap().trim();
     // assert_eq!(password_rectified,"");
@@ -130,8 +138,12 @@ fn create_vault(state: tauri::State<AppState>, vault: serde_json::Value) -> serd
     // Fix with as_str as in password_rectified later
     if password == "\"\"" {
         //create password if it does not exist
+        let mut pass_length_def = 15; 
         let mut rng = OsRng::default();
-        let random_pass: String = (0..15)
+        if pass_length > 1 &&pass_length < 500{
+            pass_length_def = pass_length;
+        }
+        let random_pass: String = (0..pass_length_def)
             .map(|_| {
                 let random_byte = rng.next_u32() as u8;
                 char::from(random_byte % 94 + 33) // Generate characters from ASCII range 33 to 126
@@ -315,13 +327,15 @@ fn logout(state: tauri::State<AppState>) -> String {
     String::from("Logged out")
 }
 fn main() {
-    let conn = db::establish_connection();
+    let db_path = "store.sqlite";
+    let conn = db::establish_connection(db_path);
+    diesel_migrations::run_pending_migrations(&conn).expect("Error migrating");
     let state = AppState {
-        conn: Mutex::new(db::establish_connection()),
+        conn: Mutex::new(conn),
         etch_key: Mutex::new(key_store::EtchedKey::new()),
         user: Mutex::new(user::User::new()),
     };
-    diesel_migrations::run_pending_migrations(&conn).expect("Error migrating");
+   
     tauri::Builder::default()
         .manage(state)
         .invoke_handler(tauri::generate_handler![
@@ -338,15 +352,4 @@ fn main() {
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
-    // use serde_json::Value;
-    // let combined_data_string = "{\"ciphertext\":\"wDrx5+1SJlsc0rXLiUoo4wrZR/v1fUKJHly8XPrpd1wf\",\"nonce\":\"OZ7f4T6Qu6FD47PZ\"}";
-    // // Parse the JSON string into a serde_json::Value object
-    // let combined_data: Value = serde_json::from_str(combined_data_string).unwrap();
-    // println!("combined_data: {}", combined_data);
-    // // Extract nonce and ciphertext strings
-    // let nonce_string = combined_data.get("nonce").and_then(Value::as_str).unwrap_or_default();
-    // let ciphertext_string = combined_data.get("ciphertext").and_then(Value::as_str).unwrap_or_default();
-
-    // println!("Nonce: {}", nonce_string);
-    // println!("Ciphertext: {}", ciphertext_string);
 }

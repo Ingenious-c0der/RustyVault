@@ -20,11 +20,16 @@ function VaultCard({ vault, onCopyPassword, onRevealPassword, toggleEditVault, t
   //console.log(vault);
   const iconNum = vault.icon_path;
   const vaultLogo = require(`./vault_images/vault-${iconNum}.png`);
-  const handleToggleDropdown = () => {
+  const handleToggleDropdown = (event) => {
+    event.stopPropagation();
     setShowDropdown(!showDropdown); // Toggle the dropdown state
   };
+  const closeDropdown = () => {
+    setShowDropdown(false);
+  };
   return (
-    <div className={`vault-card ${isPasswordShown ? 'flipped' : ''}`}>
+
+    <div  onClick={closeDropdown} className={`vault-card ${isPasswordShown ? 'flipped' : ''}`   }>
       <Image src={vaultLogo} alt="Vault Logo" className="vault-logo" />
       <h3 className="vault-name-tooltip" data-text={vault.name}>
         {vault.name.length > 9 ? `${vault.name.slice(0, 9)}...` : vault.name}

@@ -5,7 +5,7 @@ const AddVaultForm = ({ onAddVault, toggleFunc }) => {
   const [vaultName, setVaultName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  const [passlength, setPassLength] = useState(15);
   const handleSubmit = (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
@@ -16,11 +16,12 @@ const AddVaultForm = ({ onAddVault, toggleFunc }) => {
       setConfirmPassword('');
       return;
     }
-
+    console.log(passlength)
     const newVault = {
       iconPath,
       name: vaultName,
       data: password,
+      pass_length : passlength,
     };
 
     // Call the parent component's callback to add the new vault
@@ -31,6 +32,7 @@ const AddVaultForm = ({ onAddVault, toggleFunc }) => {
     setVaultName('');
     setPassword('');
     setConfirmPassword('');
+    setPassLength(15);
   };
 
   return (
@@ -62,6 +64,13 @@ const AddVaultForm = ({ onAddVault, toggleFunc }) => {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
 
+        />
+      </label>
+      <label>
+        Password Length (only if auto generating)
+        <input
+          value={passlength}
+          onChange={(e) => setPassLength(e.target.value)}
         />
       </label>
       <ToastContainer />

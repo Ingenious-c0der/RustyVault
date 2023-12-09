@@ -8,14 +8,22 @@
   },
   "package": {
     "productName": "RustyVault",
-    "version": "0.0.0"
+    "version": "0.0.1"
   },
   "tauri": {
     "allowlist": {
       "all": false,
+
       "shell": {
         "all": false,
         "open": true
+      },
+      "fs": {
+        "all": true, 
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "scope": ["$RESOURCE/vault_images/*", "$RESOURCE/store.sqlite"]
       }
     },
     "bundle": {
@@ -27,11 +35,11 @@
       },
       "externalBin": [],
       "icon": [
-        "icons/32x32.png",
         "icons/128x128.png",
         "icons/128x128@2x.png",
         "icons/icon.icns",
         "icons/icon.ico"
+        
       ],
       "identifier": "com.tauri.RustyVault",
       "longDescription": "",
@@ -42,9 +50,7 @@
         "providerShortName": null,
         "signingIdentity": null
       },
-      "resources": [
-     
-      ],
+      "resources": ["vault_images/*", "store.sqlite"],
       "shortDescription": "",
       "targets": "all",
       "windows": {

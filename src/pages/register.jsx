@@ -26,8 +26,8 @@ class Register extends React.Component {
   handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      if (this.state.username.length < 3 || this.state.password.length < 3) {
-        toast.warn("Username and Password must be at least 3 characters long", {
+      if (this.state.username.length < 5 || this.state.password.length < 8) {
+        toast.warn("Username must be atleast 5 characters long and Password must be at least 8 characters long", {
           theme: "dark",
         });
         this.setState({ username: "", password: "" });

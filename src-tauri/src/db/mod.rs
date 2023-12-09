@@ -1,13 +1,11 @@
 extern crate dotenv;
 
 //file contains methods to interact with the database through ORM
-
 pub mod models;
 use crate::schema::*;
 use diesel::prelude::*;
 use dotenv::dotenv;
 use models::{NewPst, NewVault, Pst, Vault};
-use std::env;
 use std::error::Error;
 use std::error::Error as StdError;
 use uuid::Uuid;
@@ -16,11 +14,11 @@ fn generate_vault_id() -> String {
     Uuid::new_v4().to_string()
 }
 
-pub fn establish_connection() -> SqliteConnection {
+pub fn establish_connection(dbpath: &str) -> SqliteConnection {
     dotenv().ok();
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    SqliteConnection::establish(&database_url)
-        .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
+    //let database_url = env::var(dbpath).expect("DATABASE_URL must be set");
+    SqliteConnection::establish(dbpath)
+        .unwrap_or_else(|_| panic!("Error connecting to {}", dbpath))
 }
 
 pub fn insert_pst<'a>(conn: &SqliteConnection, username: &'a str, upassword: &'a str) -> String {
