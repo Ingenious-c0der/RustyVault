@@ -15,34 +15,32 @@ Rusty Vault is designed to be secure, fast , clean and easy to use.
 
 find more detailed documentation [here](documentation.md)
 
-## First Release (v0.0.1) is out now for Windows ! Get it [here
-](https://github.com/Ingenious-c0der/RustyVault/releases/tag/v0.0.1)
+## First Release (v0.0.1) is out now for Windows ! Get it [here](https://github.com/Ingenious-c0der/RustyVault/releases/tag/v0.0.1)
 
 Direct download links (Windows only):
 
-1. [RustyVault_x64_setup.exe
-   ](https://github.com/Ingenious-c0der/RustyVault/releases/download/v0.0.1/RustyVault_0.0.1_x64-setup.exe)
+1. [RustyVault_x64_setup.exe](https://github.com/Ingenious-c0der/RustyVault/releases/download/v0.0.1/RustyVault_0.0.1_x64-setup.exe)
 2. [RustyVault_x64_Microsoft_installer.msi](https://github.com/Ingenious-c0der/RustyVault/releases/download/v0.0.1/RustyVault_0.0.1_x64_en-US.msi)
 
 ## 1. Add your passwords easily, never forget a complex random password again!
 
-![1702578510073](image/README/1702578510073.png)
+![image](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/1f3286c7-d4a5-4881-ad50-c049fd9e4122)
 
 ## 2. Search through thousands of vaults in seconds
 
-![1702578410843](image/README/1702578410843.png)
+![image](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/0e24f1aa-90d2-4577-a803-71c7963ff9bf)
 
 ### 3. Instant Decryption to either view the password or copy it to your clipboard, password isn't persisted anywhere in its original form!
 
-![1702578490058](image/README/1702578490058.png)
+![image](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/312c28ac-0c23-489a-9624-e1119fa29f01)
 
 ## 4. Edit or delete vaults without leaving a trace.
 
-![1702578904600](image/README/1702578904600.png)
+![image](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/fdb19af5-8898-497c-a48e-810931308b41)
 
 ## 5. Gotta catch them all (colors) !
 
-![1702580111729](image/README/1702580111729.png)
+![image](https://github.com/Ingenious-c0der/RustyVault/assets/76046349/025989cd-4395-49c3-bfb9-1eba27fd46d0)
 
 # TODOs : (open for contributions on the following)
 
