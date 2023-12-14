@@ -68,7 +68,7 @@ const AddVaultForm = ({ onAddVault, toggleFunc }) => {
       </label>
       <label>
         Password Length (only if auto generating)
-        <input
+        <input type="number" id="numericInput" name="numericInput" pattern="[0-9]*" inputMode="numeric"
           value={passlength}
           onChange={(e) => setPassLength(e.target.value)}
         />

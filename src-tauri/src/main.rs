@@ -2,13 +2,8 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
-
-use diesel_migrations::embed_migrations;
 #[macro_use]
 extern crate diesel;
-#[macro_use]
-extern crate diesel_migrations;
-embed_migrations!("../migrations/");
 use diesel::prelude::*;
 use std::sync::Mutex;
 pub mod crypto_process;
@@ -125,11 +120,15 @@ fn create_vault(state: tauri::State<AppState>, vault: serde_json::Value) -> serd
         });
         return res_json;
     };
-  
-    let pass_len_str_text = vault["pass_length"].as_str().unwrap_or("15");
-    let pass_length : i32= pass_len_str_text.parse().unwrap();
+    
+    
 
-   
+
+    let mut pass_len_str_text = vault["pass_length"].as_str().unwrap_or("15");
+    if pass_len_str_text == "" {
+        pass_len_str_text = "15";
+    }
+    let pass_length : i32= pass_len_str_text.parse().unwrap();
     let mut password = vault["data"].to_string();
     // let  password_rectified = vault["data"].as_str().unwrap().trim();
     // assert_eq!(password_rectified,"");
@@ -329,7 +328,7 @@ fn logout(state: tauri::State<AppState>) -> String {
 fn main() {
     let db_path = "store.sqlite";
     let conn = db::establish_connection(db_path);
-    diesel_migrations::run_pending_migrations(&conn).expect("Error migrating");
+    //diesel_migrations::run_pending_migrations(&conn).expect("Error migrating");
     let state = AppState {
         conn: Mutex::new(conn),
         etch_key: Mutex::new(key_store::EtchedKey::new()),

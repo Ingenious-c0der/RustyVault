@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import Image from "next/image";
-import vaultLogo from "../assets/vault.png";
+import vaultLogo from "../assets/vault_icon.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 class Register extends React.Component {
@@ -121,7 +121,7 @@ class Register extends React.Component {
                   type="button"
                   className="btn btn-secondary btn-block"
                   onClick={() => {
-                    window.location.href = "/index";
+                    window.location.href = "/";
                   }}
                 >
                   Back
