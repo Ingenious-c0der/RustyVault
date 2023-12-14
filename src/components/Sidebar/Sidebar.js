@@ -6,10 +6,9 @@ import profilePic from "./sidebar_images/profile_pic.png";
 const Sidebar = ({ username = "Not Found", onLogout }) => {
   let profileIconPath = "./images/vault-some_path.png";
   const generateRandomEncryptedText = () => {
-    // Your encryption logic here
-    // This is a simple example, and you may want to use a proper encryption library
+   
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-    const textLength = 68; // Increased the length for a more visible example
+    const textLength = 68;
     let encryptedText = '';
   
     for (let i = 0; i < textLength; i++) {
