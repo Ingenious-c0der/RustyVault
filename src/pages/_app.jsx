@@ -3,7 +3,7 @@ import "../App.css";
 import "../pages/styles/HomePage.css";
 import "../components/VaultCard/VaultCard.css";
 import "../components/Sidebar/Sidebar.css";
-import "../components/AddVaultForm/Addvaultform.css";
+import "../components/AddVaultForm/AddVaultForm.css";
 import "../components/DeleteVaultForm/DeleteVaultForm.css";
 import "../components/EditVaultForm/EditVaultForm.css";
 import { ReactNotifications } from "react-notifications-component";
