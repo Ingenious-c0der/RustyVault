@@ -15,12 +15,7 @@ Rusty Vault is designed to be secure, fast , clean and easy to use.
 
 find more detailed documentation [here](documentation.md)
 
-## First Release (v0.0.1) is out now for Windows ! Get it [here](https://github.com/Ingenious-c0der/RustyVault/releases/tag/v0.0.1)
-
-Direct download links (Windows only):
-
-1. [RustyVault_x64_setup.exe](https://github.com/Ingenious-c0der/RustyVault/releases/download/v0.0.1/RustyVault_0.0.1_x64-setup.exe)
-2. [RustyVault_x64_Microsoft_installer.msi](https://github.com/Ingenious-c0der/RustyVault/releases/download/v0.0.1/RustyVault_0.0.1_x64_en-US.msi)
+## First Release (v0.0.1) is out ! Get it [here](https://github.com/Ingenious-c0der/RustyVault/releases/tag/RustyVault-v0.0.1) 
 
 ## 1. Add your passwords easily, never forget a complex random password again!
 
