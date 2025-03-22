@@ -1,10 +1,11 @@
-extern crate dotenv;
+// Removed `extern crate dotenv` as it is unnecessary in Rust 2018 edition and later.
 
 //file contains methods to interact with the database through ORM
 pub mod models;
 use crate::schema::*;
 use diesel::prelude::*;
 use dotenv::dotenv;
+use diesel::connection::SimpleConnection;
 use models::{NewPst, NewVault, Pst, Vault};
 use std::error::Error;
 use std::error::Error as StdError;
@@ -12,6 +13,31 @@ use uuid::Uuid;
 
 fn generate_vault_id() -> String {
     Uuid::new_v4().to_string()
+}
+
+pub fn initialize_database(conn: &mut SqliteConnection) -> Result<(), diesel::result::Error> {
+    conn.batch_execute("PRAGMA foreign_keys = ON")?;
+
+    diesel::sql_query(
+        "CREATE TABLE IF NOT EXISTS pst (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            password TEXT NOT NULL
+        )"
+    ).execute(conn)?;
+
+    diesel::sql_query(
+        "CREATE TABLE IF NOT EXISTS vault (
+            vault_id TEXT PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            key TEXT NOT NULL,
+            icon_path TEXT NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES pst(id) ON DELETE CASCADE
+        )"
+    ).execute(conn)?;
+
+    Ok(())
 }
 
 pub fn establish_connection(dbpath: &str) -> SqliteConnection {
@@ -148,7 +174,7 @@ pub fn get_all_vaults_by_user_id<'a>(
 ) -> Result<Vec<Vault>, Box<dyn StdError>> {
     use crate::schema::vault::dsl::*;
     let mut vaults = vault
-        .filter(user_id.eq(query_user_id))
+        .filter(user_id.eq(&query_user_id))
         .load::<Vault>(conn)
         .expect("Error loading vaults");
     //TODO:remove key from all vaults

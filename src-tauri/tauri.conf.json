@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "RustyVault",
-    "version": "0.0.1"
+    "version": "0.1.0"
   },
   "tauri": {
     "allowlist": {
@@ -23,7 +23,7 @@
         "readFile": true,
         "writeFile": true,
         "readDir": true,
-        "scope": ["$RESOURCE/vault_images/*", "$RESOURCE/store.sqlite"]
+        "scope": ["$RESOURCE/vault_images/*"]
       }
     },
     "bundle": {
@@ -50,7 +50,7 @@
         "providerShortName": null,
         "signingIdentity": null
       },
-      "resources": ["vault_images/*", "store.sqlite"],
+      "resources": ["vault_images/*"],
       "shortDescription": "",
       "targets": "all",
       "windows": {

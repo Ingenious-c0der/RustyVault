@@ -1,11 +1,12 @@
 #![cfg_attr(
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
-)]
+)] //TODO : need to change this according to the target
 #[macro_use]
 extern crate diesel;
 use diesel::prelude::*;
 use std::sync::Mutex;
+use tauri::Manager;
 pub mod crypto_process;
 pub mod db;
 pub mod hash_etching;
@@ -58,7 +59,6 @@ fn login(state: tauri::State<AppState>, name: &str, password: &str) -> bool {
         |_e| {
             //println!("Error : {}", e);
             String::from("ErrorLogin")
-            
         }
     });
     if res_json == "ErrorLogin" {
@@ -120,15 +120,12 @@ fn create_vault(state: tauri::State<AppState>, vault: serde_json::Value) -> serd
         });
         return res_json;
     };
-    
-    
-
 
     let mut pass_len_str_text = vault["pass_length"].as_str().unwrap_or("15");
     if pass_len_str_text == "" {
         pass_len_str_text = "15";
     }
-    let pass_length : i32= pass_len_str_text.parse().unwrap();
+    let pass_length: i32 = pass_len_str_text.parse().unwrap();
     let mut password = vault["data"].to_string();
     // let  password_rectified = vault["data"].as_str().unwrap().trim();
     // assert_eq!(password_rectified,"");
@@ -137,9 +134,9 @@ fn create_vault(state: tauri::State<AppState>, vault: serde_json::Value) -> serd
     // Fix with as_str as in password_rectified later
     if password == "\"\"" {
         //create password if it does not exist
-        let mut pass_length_def = 15; 
+        let mut pass_length_def = 15;
         let mut rng = OsRng::default();
-        if pass_length > 1 &&pass_length < 500{
+        if pass_length > 1 && pass_length < 500 {
             pass_length_def = pass_length;
         }
         let random_pass: String = (0..pass_length_def)
@@ -323,32 +320,78 @@ fn logout(state: tauri::State<AppState>) -> String {
     //clear the app state
     state.etch_key.lock().unwrap().clear_key();
     state.user.lock().unwrap().clear_user();
+    
     String::from("Logged out")
 }
 fn main() {
-    let db_path = "store.sqlite";
-    let conn = db::establish_connection(db_path);
-    //diesel_migrations::run_pending_migrations(&conn).expect("Error migrating");
-    let state = AppState {
-        conn: Mutex::new(conn),
-        etch_key: Mutex::new(key_store::EtchedKey::new()),
-        user: Mutex::new(user::User::new()),
-    };
-   
     tauri::Builder::default()
-        .manage(state)
-        .invoke_handler(tauri::generate_handler![
-            greet,
-            register,
-            login,
-            create_vault,
-            get_password,
-            get_all_user_vaults,
-            delete_vault,
-            edit_vault,
-            get_username,
-            logout
-        ])
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+    .setup(|app| {
+        // Get the app data directory
+        let app_dir = app.path_resolver()
+            .app_data_dir()
+            .expect("Failed to get app data directory");
+        
+        // Create the directory if it doesn't exist
+        std::fs::create_dir_all(&app_dir).expect("Failed to create app data directory");
+        
+        // Set the database path
+        let db_path = app_dir.join("store.sqlite");
+        
+        // Establish connection
+        let mut conn = db::establish_connection(db_path.to_str().unwrap());
+        
+        // Initialize schema if needed
+        db::initialize_database(&mut conn).expect("Failed to initialize database");
+        
+        // Store connection in state
+        let state = AppState {
+            conn: Mutex::new(conn),
+            etch_key: Mutex::new(key_store::EtchedKey::new()),
+            user: Mutex::new(user::User::new()),
+        };
+        
+        app.manage(state);
+        
+        Ok(())
+    })
+    .invoke_handler(tauri::generate_handler![
+        greet,
+        register,
+        login,
+        create_vault,
+        get_password,
+        get_all_user_vaults,
+        delete_vault,
+        edit_vault,
+        get_username,
+        logout
+    ])
+    .run(tauri::generate_context!())
+    .expect("error while running tauri application");
 }
+//     let db_path = "store.sqlite";
+//     let conn = db::establish_connection(db_path);
+//     //diesel_migrations::run_pending_migrations(&conn).expect("Error migrating");
+//     let state = AppState {
+//         conn: Mutex::new(conn),
+//         etch_key: Mutex::new(key_store::EtchedKey::new()),
+//         user: Mutex::new(user::User::new()),
+//     };
+
+//     tauri::Builder::default()
+//         .manage(state)
+//         .invoke_handler(tauri::generate_handler![
+//             greet,
+//             register,
+//             login,
+//             create_vault,
+//             get_password,
+//             get_all_user_vaults,
+//             delete_vault,
+//             edit_vault,
+//             get_username,
+//             logout
+//         ])
+//         .run(tauri::generate_context!())
+//         .expect("error while running tauri application");
+// }

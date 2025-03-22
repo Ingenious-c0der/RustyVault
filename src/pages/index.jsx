@@ -23,6 +23,7 @@ class App extends React.Component {
     try {
       //console.log("submit");
       event.preventDefault();
+      //console.log("username", this.state.username);
       if (this.state.username.length < 5 || this.state.password.length < 8) {
         toast.error("Invalid Username or Password", { theme: "dark" });
         this.setState({ username: "", password: "" });
